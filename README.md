@@ -5,8 +5,7 @@ Copyright 2020 The MathWorks, Inc.
 
 This repository provides a functions to convert your live scripts to markdown file. I hope this function makes your life easy to document your repository.
 
-I've checked the function with multiple live scripts but please note that it's not perfect. It's expected that you need some manual editing
-s.
+I've checked the function with multiple live scripts but please note that it's not perfect. It's expected that you need some manual editing.
 
 [English instruction](doc/README_EN.md)
 
