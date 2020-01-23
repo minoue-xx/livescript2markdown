@@ -1,19 +1,19 @@
 
-# MATLAB ‚Ì Live Script ‚©‚ç Markdown ‚Ö‚ÌŽ©“®•ÏŠ·
+# MATLAB ã® Live Script ã‹ã‚‰ Markdown ã¸ã®è‡ªå‹•å¤‰æ›
 
 
 Copyright 2020 The MathWorks, Inc.
 
 
-# ‚Í‚¶‚ß‚É
+# ã¯ã˜ã‚ã«
 
 
-‚±‚Ì README ‚Í [ƒ‰ƒCƒuƒXƒNƒŠƒvƒg](https://jp.mathworks.com/help/matlab/matlab_prog/what-is-a-live-script-or-function.html) ‚ð Qiita/Github ‚Ì Markdown ‚ÉŽ©“®•ÏŠ·‚·‚éŠÖ” `latex2markdown.m` ‚ðŽg‚Á‚Äo—Í‚³‚ê‚½‚à‚Ì‚Å‚·BLive Editor ã‚ÅŽg‚¦‚é‹@”\‚Æ GitHub ‚Å‚Ì•\Ž¦‚ðŠm”F‚µ‚Ä‚Ý‚Ä‚­‚¾‚³‚¢B
+ã“ã® README ã¯ [ãƒ©ã‚¤ãƒ–ã‚¹ã‚¯ãƒªãƒ—ãƒˆ](https://jp.mathworks.com/help/matlab/matlab_prog/what-is-a-live-script-or-function.html) ã‚’ Qiita/Github ã® Markdown ã«è‡ªå‹•å¤‰æ›ã™ã‚‹é–¢æ•° `latex2markdown.m` ã‚’ä½¿ã£ã¦å‡ºåŠ›ã•ã‚ŒãŸã‚‚ã®ã§ã™ã€‚Live Editor ä¸Šã§ä½¿ãˆã‚‹æ©Ÿèƒ½ã¨ GitHub ã§ã®è¡¨ç¤ºã‚’ç¢ºèªã—ã¦ã¿ã¦ãã ã•ã„ã€‚
 
 
   
-## Žg‚¢•û: README.mlx ‚ð•ÏŠ·‚·‚éê‡
-### Step 1: Latex ‚É•ÏŠ·
+## ä½¿ã„æ–¹: README.mlx å¤‰æ›ã™ã‚‹å ´åˆ
+### Step 1: Latex ã«å¤‰æ›
 
 
 ![image_0.png](README_JP_images/image_0.png)
@@ -21,25 +21,25 @@ Copyright 2020 The MathWorks, Inc.
 
 
 
-LateX ‚Éo—Í‚µ‚½Žž“_‚ÅŠÖ˜A‰æ‘œilive script “à‚ÅŽg—p‚µ‚½‰æ‘œ‚â Figure) ‚Í `README_images` ‚Æ‚¢‚¤ƒtƒHƒ‹ƒ_‚ªì‚ç‚êA‚»‚¿‚ç‚É•Û‘¶‚³‚ê‚Ü‚·Bi‚±‚±‚àƒRƒ}ƒ“ƒh‚ÅŽÀs‚·‚é•û–@‚Í‚ ‚è‚Ü‚·i[ŽQl](https://jp.mathworks.com/matlabcentral/answers/396348-how-to-find-and-replace-within-mlx-live-scripts-across-multiple-files)j‚ª”ñŒöŽ®‚Å‚ ‚é“_‚²—‰ð‚­‚¾‚³‚¢j
+Latex ã«å‡ºåŠ›ã—ãŸæ™‚ç‚¹ã§é–¢é€£ç”»åƒï¼ˆlive script å†…ã§ä½¿ç”¨ã—ãŸç”»åƒã‚„ Figure) ã¯ `README_images` ã¨ã„ã†ãƒ•ã‚©ãƒ«ãƒ€ãŒä½œã‚‰ã‚Œã€ãã¡ã‚‰ã«ä¿å­˜ã•ã‚Œã¾ã™ã€‚ï¼ˆã“ã“ã‚‚ã‚³ãƒžãƒ³ãƒ‰ã§å®Ÿè¡Œã™ã‚‹æ–¹æ³•ã¯ã‚ã‚Šã¾ã™ãŒéžå…¬å¼ãªã®ã§ï¼š[å‚è€ƒ](https://jp.mathworks.com/matlabcentral/answers/396348-how-to-find-and-replace-within-mlx-live-scripts-across-multiple-files)ï¼‰
 
 
-### Step 2: markdown ‚É•ÏŠ·
+### Step 2: markdown ã«å¤‰æ›
 ```matlab
 latex2markdown('README');
 ```
 
 
-‚Å GitHub Œü‚¯‚Ì markdown ‚Å README.md ‚ª¶¬‚³‚ê‚Ü‚·BƒIƒvƒVƒ‡ƒ“‚ÍˆÈ‰º‚Ì‚Q‚ÂB
+ã§ GitHub å‘ã‘ã® markdown ã§ README.md ãŒç”Ÿæˆã•ã‚Œã¾ã™ã€‚ã‚ªãƒ—ã‚·ãƒ§ãƒ³ã¯ä»¥ä¸‹ã®ï¼’ã¤ã€‚
 
 
 
-   -  `'format'`: —p“r‚É‡‚í‚¹‚Ä `'github'` (Šù’è) ‚à‚µ‚­‚Í `'qiita'` ‚ðŽw’è‚µ‚Ä‚­‚¾‚³‚¢B 
-   -  `'outputfilename'`: Žw’è‚µ‚È‚¢ê‡‚ÍAlive script ‚Æ“¯‚¶–¼‘O`.md` ‚Ìƒtƒ@ƒCƒ‹‚ª¶¬‚³‚ê‚Ü‚·B 
+   -  `'format'`: ç”¨é€”ã«åˆã‚ã›ã¦ `'github'` (æ—¢å®š) ã‚‚ã—ãã¯ `'qiita'` ã‚’æŒ‡å®šã—ã¦ãã ã•ã„ã€‚ 
+   -  `'outputfilename'`: æŒ‡å®šã—ãªã„å ´åˆã¯ã€live script ã¨åŒã˜åå‰`.md` ã®ãƒ•ã‚¡ã‚¤ãƒ«ãŒç”Ÿæˆã•ã‚Œã¾ã™ã€‚ 
 
 
 
-—á‚¦‚Î Qiita Œü‚¯‚É QiitaDraft.md ‚ðì‚éê‡‚Í
+ä¾‹ãˆã° Qiita å‘ã‘ã« QiitaDraft.md ã‚’ä½œã‚‹å ´åˆã¯
 
 
 ```matlab
@@ -47,22 +47,22 @@ latex2markdown('README','format','qiita','outputfilename','QiitaDraft');
 ```
 
 
-‚Å‚·B
+ã§ã™ã€‚
 
 
-## Qiita ‚Æ GitHub ‚Ìˆá‚¢
+## Qiita ã¨ GitHub ã®é•ã„
 
 
-”Ž®‚Æ‰æ‘œ‚ÌŽæ‚èˆµ‚¢‚Å‚·B”Ž®‚Í Qiita ‚Å‚Í latex ‚ªŽg‚¦‚éˆê•ûAGitHub ‚ÍŽó‚¯•t‚¯‚È‚¢‚Ì‚ÅACODECOGS ([https://latex.codecogs.com](https://latex.codecogs.com)) ‚ðŽg—p‚µ‚Ä‚¢‚Ü‚·B‚Ü‚½‰æ‘œ‚Ìê‡AGitHub ‚Í‰æ‘œƒtƒHƒ‹ƒ_‚à‡‚í‚¹‚Ä Push ‚·‚ê‚Î•\Ž¦‚³‚ê‚Ü‚·‚ªAQiita ‚Ìê‡‚ÍƒGƒfƒBƒ^“à‚Å‰ü‚ß‚Ä Drag \& Drop ‚·‚é•K—v‚ª‚ ‚è‚Ü‚·B
+æ•°å¼ã¨ç”»åƒã®å–ã‚Šæ‰±ã„ã§ã™ã€‚æ•°å¼ã¯ Qiita ã§ã¯ latex ãŒä½¿ãˆã‚‹ä¸€æ–¹ã€GitHub ã¯å—ã‘ä»˜ã‘ãªã„ã®ã§ã€CODECOGS ([https://latex.codecogs.com](https://latex.codecogs.com)) ã‚’ä½¿ç”¨ã—ã¦ã„ã¾ã™ã€‚ã¾ãŸç”»åƒã®å ´åˆã€GitHub ã¯ç”»åƒãƒ•ã‚©ãƒ«ãƒ€ã‚‚åˆã‚ã›ã¦ Push ã™ã‚Œã°è¡¨ç¤ºã•ã‚Œã¾ã™ãŒã€Qiita ã®å ´åˆã¯ã‚¨ãƒ‡ã‚£ã‚¿å†…ã§æ”¹ã‚ã¦ Drag \& Drop ã™ã‚‹å¿…è¦ãŒã‚ã‚Šã¾ã™ã€‚
 
 
   
-# ‘Î‰ž‚·‚é‹@”\
+# å¯¾å¿œã™ã‚‹æ©Ÿèƒ½
 
 # MATLAB Code
 
 
-MATLAB code ‚ÆŽÀsŒ‹‰Ê‚Ìƒvƒƒbƒg‚ÍˆÈ‰º‚Ì‚æ‚¤‚É•\Ž¦‚³‚ê‚Ü‚·B
+MATLAB code ã¨å®Ÿè¡Œçµæžœã®ãƒ—ãƒ­ãƒƒãƒˆã¯ä»¥ä¸‹ã®ã‚ˆã†ã«è¡¨ç¤ºã•ã‚Œã¾ã™ã€‚
 
 
 ```matlab
@@ -81,10 +81,10 @@ plot(x,y);
 
 ![figure_0.png](README_JP_images/figure_0.png)
 
-## ƒe[ƒuƒ‹o—Í
+## ãƒ†ãƒ¼ãƒ–ãƒ«å‡ºåŠ›
 
 
-table Œ^•Ï”‚Ìo—Í‚ÍˆÈ‰º‚Ì‚æ‚¤‚È•\Ž¦‚É‚È‚è‚Ü‚·B
+table åž‹å¤‰æ•°ã®å‡ºåŠ›ã¯ä»¥ä¸‹ã®ã‚ˆã†ãªè¡¨ç¤ºã«ãªã‚Šã¾ã™ã€‚
 
 
 ```matlab
@@ -98,7 +98,7 @@ array2table(rand(3,4))
 
 
 
-‚½‚¾AˆÈ‰º‚Ì‚æ‚¤‚É•Ï”‚Ì”‚Æƒe[ƒuƒ‹‚Ì—ñ”‚ª‡’v‚µ‚Ä‚¢‚È‚¢ê‡‚ÍA‚¤‚Ü‚­•\Ž¦‚³‚ê‚Ü‚¹‚ñB
+ãŸã ã€ä»¥ä¸‹ã®ã‚ˆã†ã«å¤‰æ•°ã®æ•°ã¨ãƒ†ãƒ¼ãƒ–ãƒ«ã®åˆ—æ•°ãŒåˆè‡´ã—ã¦ã„ãªã„å ´åˆã¯ã€ã†ã¾ãè¡¨ç¤ºã•ã‚Œã¾ã›ã‚“ã€‚
 
 
 ```matlab
@@ -112,34 +112,34 @@ table(rand(3,4))
 
 
 
-ƒZƒ‹‚ªƒ}[ƒW‚³‚ê‚½•\‚Ì markdown ‹LÚ•û–@‚ª‚ ‚ê‚Î‹³‚¦‚Ä‚­‚¾‚³‚¢B
+ã‚»ãƒ«ãŒãƒžãƒ¼ã‚¸ã•ã‚ŒãŸè¡¨ã® markdown è¨˜è¼‰æ–¹æ³•ãŒã‚ã‚Œã°æ•™ãˆã¦ãã ã•ã„ã€‚
 
 
   
-## ‚»‚Ì‘¼‚Ìo—ÍŒ`Ž®
+## ãã®ä»–ã®å‡ºåŠ›å½¢å¼
 
 
-‚·‚×‚Ä‚ÌŒ`Ž®‚ðŽŽ‚µ‚½‚í‚¯‚Å‚Í‚È‚¢‚Ì‚ÅAo—Í‚ª•¡ŽG‚É‚È‚é‚Æ‚à‚µ‚¤‚Ü‚­•\Ž¦‚³‚ê‚È‚¢‰Â”\«‚à‚ ‚è‚Ü‚·B‚à‚µ‚ ‚ê‚ÎA‚¨Žè”‚Å‚·‚ªƒRƒƒ“ƒg‚à‚µ‚­‚Í issue ‚Æ‚µ‚Ä‹“‚°‚Ä’¸‚¯‚é‚Æ•‚©‚è‚Ü‚·B
+ã™ã¹ã¦ã®å½¢å¼ã‚’è©¦ã—ãŸã‚ã‘ã§ã¯ãªã„ã®ã§ã‚‚ã—ã†ã¾ãè¡¨ç¤ºã•ã‚Œãªã„ãƒ‡ãƒ¼ã‚¿ãŒã‚ã‚Œã° issue ã¨ã—ã¦æŒ™ã’ã¦é ‚ã‘ã‚‹ã¨åŠ©ã‹ã‚Šã¾ã™ã€‚
 
 
   
 
-## ƒR[ƒh—á‚Æ‚µ‚Ä‚Ì MATLAB Code
+## ã‚³ãƒ¼ãƒ‰ä¾‹ã¨ã—ã¦ã® MATLAB Code
 
 
-ŽÀs‚³‚ê‚È‚¢Œ©‚¹‚é‚¾‚¯‚Ì MATLAB code ‚àˆÈ‰º‚Ì’Ê‚èBã‚Ì‹æ•Ê‚ª‚Â‚©‚È‚¢“_‚É’ˆÓB
+å®Ÿè¡Œã•ã‚Œãªã„è¦‹ã›ã‚‹ã ã‘ã® MATLAB code ã‚‚ä»¥ä¸‹ã®é€šã‚Šã€‚ä¸Šã®åŒºåˆ¥ãŒã¤ã‹ãªã„ç‚¹ã«æ³¨æ„ã€‚
 
 
 ```matlab
-% matlab code sample view (ŽÀs‚³‚ê‚È‚¢‚æj
+% matlab code sample view (å®Ÿè¡Œã•ã‚Œãªã„ã‚ˆï¼‰
 x = linspace(0,1,100);
 y = sin(x);
 plot(x,y);
 ```
-# ‘}“ü‚³‚ê‚½‰æ‘œ
+# æŒ¿å…¥ã•ã‚ŒãŸç”»åƒ
 
 
-Live script ‚É‘}“ü‚³‚ê‚½‰æ‘œ‚ÍˆÈ‰º‚Ì’Ê‚èB
+Live script ã«æŒ¿å…¥ã•ã‚ŒãŸç”»åƒã¯ä»¥ä¸‹ã®é€šã‚Šã€‚
 
 
 
@@ -147,10 +147,10 @@ Live script ‚É‘}“ü‚³‚ê‚½‰æ‘œ‚ÍˆÈ‰º‚Ì’Ê‚èB
 ![image_1.png](README_JP_images/image_1.png)
 
 
-# ”Ž®
+# æ•°å¼
 
 
-Live script ‚É‘}“ü‚³‚ê‚½”Ž®‚Í latex Œ`Ž®‚Å‘‚«o‚³‚ê‚Ü‚·BƒCƒ“ƒ‰ƒCƒ“‚Å‚Ì”Ž®B <img src="https://latex.codecogs.com/gif.latex?\inline&space;\sin^2&space;x+\cos^2&space;x=1"/>B•¡”s‚¾‚Æ
+Live script ã«æŒ¿å…¥ã•ã‚ŒãŸæ•°å¼ã¯ latex å½¢å¼ã§æ›¸ãå‡ºã•ã‚Œã¾ã™ã€‚ã‚¤ãƒ³ãƒ©ã‚¤ãƒ³ã§ã®æ•°å¼ã€‚ <img src="https://latex.codecogs.com/gif.latex?\inline&space;\sin^2&space;x+\cos^2&space;x=1"/>ã€‚è¤‡æ•°è¡Œã ã¨
 
 
 
@@ -158,57 +158,57 @@ Live script ‚É‘}“ü‚³‚ê‚½”Ž®‚Í latex Œ`Ž®‚Å‘‚«o‚³‚ê‚Ü‚·BƒCƒ“ƒ‰ƒCƒ“‚Å‚Ì”Ž®B 
 
 
 
-’Ps‚Ì”Ž®
+å˜è¡Œã®æ•°å¼
 
 
 
 <img src="https://latex.codecogs.com/gif.latex?\sin&space;x=-\int&space;\cos&space;xdx"/>
 
-# ƒŠƒXƒg
+# ãƒªã‚¹ãƒˆ
 
 
-ƒŠƒXƒg‚àˆÈ‰º‚Ì’Ê‚è‚Å‚·B
-
-
-
-   -  ƒŠƒXƒg‚P 
-   -  ƒŠƒXƒg‚Q 
-   -  ƒŠƒXƒg‚R 
+ãƒªã‚¹ãƒˆã‚‚ä»¥ä¸‹ã®é€šã‚Šã§ã™ã€‚
 
 
 
-”Žš•t‚«‚ÌƒŠƒXƒg‚à•\Ž¦‚³‚¹‚Ä‚Ý‚Ü‚·B
+   -  ãƒªã‚¹ãƒˆï¼‘ 
+   -  ãƒªã‚¹ãƒˆï¼’ 
+   -  ãƒªã‚¹ãƒˆï¼“ 
 
 
 
-   1.  ƒŠƒXƒgA 
-   1.  ƒŠƒXƒgB 
-   1.  ƒŠƒXƒgC 
-
-# •¶Žš‘•ü
-
-
-Live Editor ‚Å‘Î‰ž‚µ‚Ä‚¢‚é‘g‚Ý‡‚í‚¹‚ð‘S•”•À‚×‚é‚ÆF**‘¾Žš**A*ƒCƒ^ƒŠƒbƒN*A‰ºü•t‚«•¶ŽšA`“™••¶Žš`A***ƒCƒ^ƒŠƒbƒN‘¾Žš***A**`“™•‘¾Žš`**A**‰ºü•t‚«‘¾Žš**A***‰ºü•t‚«ƒCƒ^ƒŠƒbƒN‘¾Žš***A***`‰ºü•t‚«ƒCƒ^ƒŠƒbƒN“™•‘¾Žš`***
+æ•°å­—ä»˜ãã®ãƒªã‚¹ãƒˆã‚‚è¡¨ç¤ºã•ã›ã¦ã¿ã¾ã™ã€‚
 
 
 
+   1.  ãƒªã‚¹ãƒˆA 
+   1.  ãƒªã‚¹ãƒˆB 
+   1.  ãƒªã‚¹ãƒˆC 
 
-‰º•t‚«•¶Žš‚ÍŒ»Žž“_‚Å–³Ž‹‚³‚ê‚Ü‚·‚Ì‚Å‚²—¹³‚­‚¾‚³‚¢B
-
-
-# ˆø—p•¶
-
-
-Live Editor ‚É‚Íˆø—p‚ÉŠY“–‚·‚é‹@”\‚Í‚È‚¢‚Ì‚Å‚·‚ªAŽŽ‚µ‚É’†‰›‚ÉˆÊ’uÝ’è‚³‚ê‚½•¶Í‚Íˆø—pˆµ‚¢‚É‚·‚é‚±‚Æ‚É‚µ‚Ä‚¢‚Ü‚·B
+# æ–‡å­—è£…é£¾
 
 
-> ˆø—p•¶‚àŽg‚¤‚©‚Èiby michio) 
+Live Editor ã§å¯¾å¿œã—ã¦ã„ã‚‹çµ„ã¿åˆã‚ã›ã‚’å…¨éƒ¨ä¸¦ã¹ã‚‹ã¨ï¼š**å¤ªå­—**ã€*ã‚¤ã‚¿ãƒªãƒƒã‚¯*ã€ä¸‹ç·šä»˜ãæ–‡å­—ã€`ç­‰å¹…æ–‡å­—`ã€***ã‚¤ã‚¿ãƒªãƒƒã‚¯å¤ªå­—***ã€**`ç­‰å¹…å¤ªå­—`**ã€**ä¸‹ç·šä»˜ãå¤ªå­—**ã€***ä¸‹ç·šä»˜ãã‚¤ã‚¿ãƒªãƒƒã‚¯å¤ªå­—***ã€***`ä¸‹ç·šä»˜ãã‚¤ã‚¿ãƒªãƒƒã‚¯ç­‰å¹…å¤ªå­—`***
+
+
+
+
+ä¸‹ä»˜ãæ–‡å­—ã¯ç¾æ™‚ç‚¹ã§ç„¡è¦–ã•ã‚Œã¾ã™ã®ã§ã”äº†æ‰¿ãã ã•ã„ã€‚
+
+
+# å¼•ç”¨æ–‡
+
+
+Live Editor ã«ã¯å¼•ç”¨ã«è©²å½“ã™ã‚‹æ©Ÿèƒ½ã¯ãªã„ã®ã§ã™ãŒã€è©¦ã—ã«ä¸­å¤®ã«ä½ç½®è¨­å®šã•ã‚ŒãŸæ–‡ç« ã¯å¼•ç”¨æ‰±ã„ã«ã™ã‚‹ã“ã¨ã«ã—ã¦ã„ã¾ã™ã€‚
+
+
+> å¼•ç”¨æ–‡ã‚‚ä½¿ã†ã‹ãªï¼ˆby michio) 
 
 
   
 # Feedback
 
 
-‰½‚©‹C‚É‚È‚é‚±‚Æ‚ª‚ ‚ê‚Î‰“—¶‚È‚­ƒRƒƒ“ƒg‚­‚¾‚³‚¢B
+ä½•ã‹æ°—ã«ãªã‚‹ã“ã¨ãŒã‚ã‚Œã°é æ…®ãªãã‚³ãƒ¡ãƒ³ãƒˆãã ã•ã„ã€‚
 
 
