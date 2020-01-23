@@ -14,14 +14,10 @@ str2md = replace(str2md,"\textless{}","<");
 % $ (live script) -> \$ (latex)
 str2md = replace(str2md,"\$","$");
 
-% f: { (live script) -> \} (latex) (leave it)
-% g: } (live script) -> \{ (latex) (leave it)
-
-%% 2-2: Titile and headings (見出し部分)
-str2md = regexprep(str2md,"\\matlabtitle{([^{}]+)}","# $1");
-str2md = regexprep(str2md,"\\matlabheading{([^{}]+)}","# $1");
-str2md = regexprep(str2md,"\\matlabheadingtwo{([^{}]+)}","## $1");
-str2md = regexprep(str2md,"\\matlabheadingthree{([^{}]+)}","### $1");
+% f: { (live script) -> \} (latex) (leave it till end)
+% g: } (live script) -> \{ (latex) (leave it till end)
+% str2md = replace(str2md,"\{","{");
+% str2md = replace(str2md,"\}","}");
 
 %% 2-3: Text decoration (文字装飾部分)
 % \textbf{太字}
@@ -35,17 +31,37 @@ str2md = regexprep(str2md,"\\matlabheadingthree{([^{}]+)}","### $1");
 % \underline{\textit{\textbf{下線付きイタリック太字}}}、
 % \texttt{\underline{\textit{\textbf{下線付きイタリック等幅太字}}}}
 
+% To deal with \{ and \} inside the command which should be left as they
+% are
+str2md = replace(str2md,"\{", "BackslashCurlyBlacketOpen");
+str2md = replace(str2md,"\}", "BackslashCurlyBlacketClose");
+
 % Need to keep this execution sequence
 str2md = regexprep(str2md,"\\textbf{([^{}]+)}","**$1**");
 str2md = regexprep(str2md,"\\textit{([^{}]+)}","*$1*");
 str2md = regexprep(str2md,"\\underline{([^{}]+)}","$1"); % Ignore underline (下線は無視）
 str2md = regexprep(str2md,"\\texttt{(\*{0,3})([^*{}]+)(\*{0,3})}","$1`$2`$3");
+
 % Note on the processing \testt
 % str2md = regexprep(str2md,"\\texttt{([^{}]+)}","`$1`");
 % gives
 % `**等幅太字**`
 % which does not work. ` ` needs to be most inside.
 % `` が最も外側にくるが一番内側にある必要がある。
+
+%% 2-2: Titile and headings (見出し部分)
+str2md = regexprep(str2md,"\\matlabtitle{([^{}]+)}","# $1");
+str2md = regexprep(str2md,"\\matlabheading{([^{}]+)}","# $1");
+str2md = regexprep(str2md,"\\matlabheadingtwo{([^{}]+)}","## $1");
+str2md = regexprep(str2md,"\\matlabheadingthree{([^{}]+)}","### $1");
+
+%% 2-6: Hyperlinks (ハイパーリンク)
+% Markdown: [string](http://xxx.com)
+% latex: \href{http://xxx.com}{string}
+str2md = regexprep(str2md,"\\href{([^{}]+)}{([^{}]+)}","[$2]($1)");
+
+str2md = replace(str2md,"BackslashCurlyBlacketOpen","\{");
+str2md = replace(str2md, "BackslashCurlyBlacketClose","\}");
 
 %% 2-4: Quotation (引用パラグラフ)
 % Markdown: >
@@ -73,11 +89,6 @@ str2md = erase(str2md,"\begin{flushleft}");
 str2md = erase(str2md,"\end{flushleft}");
 str2md = erase(str2md,"\begin{center}");
 str2md = erase(str2md,"\end{center}");
-
-%% 2-6: Hyperlinks (ハイパーリンク)
-% Markdown: [string](http://xxx.com)
-% latex: \href{http://xxx.com}{string}
-str2md = regexprep(str2md,"\\href{([^{}]+)}{([^{}]+)}","[$2]($1)");
 
 %% 2-7: Unordered list (リスト)
 % markdown: add - to each item
@@ -202,3 +213,7 @@ for ii=1:sum(idxTblOutput)
     tableMD(ii) = strjoin([header,format,body],newline);
 end
 str2md(idxTblOutput) = tableMD;
+
+%% finish up
+str2md = replace(str2md,"\{","{");
+str2md = replace(str2md,"\}","}");
