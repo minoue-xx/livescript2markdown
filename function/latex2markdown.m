@@ -1,6 +1,3 @@
-% \texttt{^\{\} }は、\texttt{\{ }と `\` }以外の任意の文字
-% \texttt{\href\{http://xxx.com\}\{テキスト\} }
-
 function mdfile = latex2markdown(filename,options)
 %  Copyright 2020 The MathWorks, Inc.
 
@@ -40,13 +37,14 @@ str = extractBetween(str,"\begin{document}","\end{document}");
 % Preprocess 1:
 % Add 'newline' to the end of the following.
 % \end{lstlisting}, \end{verbatim}, \end{matlabcode}, \end{matlaboutput},\end{center}
-% \end{matlabtableoutput}  \vspace{1em}
+% \end{matlabtableoutput}, \end{matlabsymbolicoutput}  \vspace{1em}
 % 要素ごとに分割しやすいように \end の後に改行が無い場合は１つ追加
 str = replace(str,"\end{lstlisting}"+newline,"\end{lstlisting}"+newline+newline);
 str = replace(str,"\end{verbatim}"+newline,"\end{verbatim}"+newline+newline);
 str = replace(str,"\end{matlabcode}"+newline,"\end{matlabcode}"+newline+newline);
 str = replace(str,"\end{matlaboutput}"+newline,"\end{matlaboutput}"+newline+newline);
 str = replace(str,"\end{matlabtableoutput}"+newline,"\end{matlabtableoutput}"+newline+newline);
+str = replace(str,"\end{matlabsymbolicoutput}"+newline,"\end{matlabsymbolicoutput}"+newline+newline);
 str = replace(str,"\end{center}"+newline,"\end{center}"+newline+newline);
 str = replace(str,"\vspace{1em}"+newline,"\vspace{1em}"+newline+newline);
 
@@ -79,10 +77,14 @@ str = strsplit(str,'\n\n')';
 % \begin{lstlisting}
 % \begin{matlabcode}
 % \begin{matlaboutput}
+% \begin{matlabtableoutput}
+% \begin{matlabsymbolicoutput}
 str = mergeSameEnvironments(str,"lstlisting");
 str = mergeSameEnvironments(str,"verbatim");
 str = mergeSameEnvironments(str,"matlabcode");
 str = mergeSameEnvironments(str,"matlaboutput");
+str = mergeSameEnvironments(str,"matlabtableoutput");
+str = mergeSameEnvironments(str,"matlabsymbolicoutput");
 
 %% Let's convert latex to markdown
 % 1: Process parts that require literal output.

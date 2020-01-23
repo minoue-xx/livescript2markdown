@@ -12,12 +12,16 @@ function str2md = processEquations(str2md, format)
 
 switch format
     case 'qiita'
-        str2md = regexprep(str2md,"[^`]\$\$([^$]+)\$\$[^`]","```math" + newline + "$1" + newline + "```");
+        str2md = regexprep(str2md,"[^`]?\$\$([^$]+)\$\$[^`]?",newline+"```math" + newline + "$1" + newline + "```");
     case 'github'
-        tt = regexp(str2md,"[^`]\$\$([^$]+)\$\$[^`]", 'tokens');
-        parts = horzcat(tt{:});
+        tt = regexp(str2md,"[^`]?\$\$([^$]+)\$\$[^`]?", 'tokens');
+        idx = cellfun(@iscell,tt); 
+        % if tt contains 0x0 string, horzcat(tt{:}) generates string vector
+        % whereas if tt with cell only, horzcat(tt{:}) generates cell
+        % vector... so.
+        parts = horzcat(tt{idx});
         for ii=1:length(parts)
-            eqncode = replace(parts(ii),string(newline)," ");
+            eqncode = replace(parts{ii},string(newline)," ");
             eqncode = replace(eqncode," ", "&space;");
             partsMD = "<img src=""https://latex.codecogs.com/gif.latex?" ...
                 + eqncode + """/>";

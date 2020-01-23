@@ -118,9 +118,31 @@ str2md(itemizeIdx) = partsMarkdown;
 % ans =
 %     $\displaystyle -\cos \left(x\right)$
 % \end{matlabsymbolicoutput}
-str2md = erase(str2md,"\begin{matlabsymbolicoutput}"+newline);
-str2md = erase(str2md,"\end{matlabsymbolicoutput}");
-str2md = erase(str2md,"\hskip1em");
+% str2md = erase(str2md,"\begin{matlabsymbolicoutput}"+newline);
+% str2md = erase(str2md,"\end{matlabsymbolicoutput}");
+% str2md = erase(str2md,"\hskip1em");
+
+symoutIdx = contains(str2md,["\begin{matlabsymbolicoutput}","\end{matlabsymbolicoutput}"]);
+symoutParts = str2md(symoutIdx);
+tmp = erase(symoutParts,"\begin{matlabsymbolicoutput}"+newline);
+tmp = replace(tmp,"$\displaystyle","$$");
+partsMarkdown = replace(tmp,"$"+newline+"\end{matlabsymbolicoutput}","$$");
+str2md(symoutIdx) = partsMarkdown;
+% This part will be processed by processEquations.m
+
+%%
+% latex:
+% \begin{matlabsymbolicoutput}
+% a = 
+%     $\displaystyle \left(\begin{array}{cccc}
+% \cos \left(\theta \right) & -\sin \left(\theta \right) & 0 & 0\\
+% \sin \left(\theta \right) & \cos \left(\theta \right) & 0 & 0\\
+% 0 & 0 & 1 & 0\\
+% 0 & 0 & 0 & 1
+% \end{array}\right)$
+% \end{matlabsymbolicoutput}
+
+
 
 %% 2-10: table output (table 型データの出力)
 % markdown:
