@@ -1,4 +1,9 @@
 # ぬめぬめ動く棒グラフ Bar Chart Race を描いてみよう: 準備編
+
+
+使い方
+
+
 ```matlab
 livescript2markdown('barChartRaceExample_part1','format','qiita');
 ```
@@ -12,6 +17,7 @@ livescript2markdown('barChartRaceExample_part1','format','qiita');
 注意：画像部分は別途 Drag \& Drop で Qiita に載せる必要があります。
 
 
+# はじめに
 
 
 最近よくみるこんなプロット：各データの時系列変化を順位とともに表現するプロットです。時間とともに順位が入れ替わるので Bar Chart Race とか呼ばれている（？）ようで、検索するといろんなデータの可視化がみられます。
