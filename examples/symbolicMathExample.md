@@ -1,4 +1,9 @@
 # Symbolic Math Example
+
+
+Copyright 2020 The MathWorks, Inc.
+
+
 ```matlab
 syms theta
 f = sin(theta)
