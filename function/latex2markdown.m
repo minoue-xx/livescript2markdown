@@ -47,6 +47,7 @@ str = replace(str,"\end{verbatim}"+newline,"\end{verbatim}"+newline+newline);
 str = replace(str,"\end{matlabcode}"+newline,"\end{matlabcode}"+newline+newline);
 str = replace(str,"\end{matlaboutput}"+newline,"\end{matlaboutput}"+newline+newline);
 str = replace(str,"\end{matlabtableoutput}"+newline,"\end{matlabtableoutput}"+newline+newline);
+str = replace(str,"\end{matlabsymbolicoutput}"+newline,"\end{matlabsymbolicoutput}"+newline+newline);
 str = replace(str,"\end{center}"+newline,"\end{center}"+newline+newline);
 str = replace(str,"\vspace{1em}"+newline,"\vspace{1em}"+newline+newline);
 
@@ -79,10 +80,14 @@ str = strsplit(str,'\n\n')';
 % \begin{lstlisting}
 % \begin{matlabcode}
 % \begin{matlaboutput}
+% \begin{matlabtableoutput}
+% \begin{matlabsymbolicoutput}
 str = mergeSameEnvironments(str,"lstlisting");
 str = mergeSameEnvironments(str,"verbatim");
 str = mergeSameEnvironments(str,"matlabcode");
 str = mergeSameEnvironments(str,"matlaboutput");
+str = mergeSameEnvironments(str,"matlabtableoutput");
+str = mergeSameEnvironments(str,"matlabsymbolicoutput");
 
 %% Let's convert latex to markdown
 % 1: Process parts that require literal output.
