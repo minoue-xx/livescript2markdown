@@ -8,11 +8,11 @@ Copyright 2020 The MathWorks, Inc.
 # はじめに
 
 
-この REAME は [ライブスクリプト](https://jp.mathworks.com/help/matlab/matlab_prog/what-is-a-live-script-or-function.html) を Qiita/Github の Markdown に自動変換する関数 `latex2markdown.m` を使って出力されたものです。Live Editor 上で使える機能と GitHub での表示を確認してみてください。
+この README は [ライブスクリプト](https://jp.mathworks.com/help/matlab/matlab_prog/what-is-a-live-script-or-function.html) を Qiita/Github の Markdown に自動変換する関数 `latex2markdown.m` を使って出力されたものです。Live Editor 上で使える機能と GitHub での表示を確認してみてください。
 
 
   
-## 使い方: README.mlx 変換する場合
+## 使い方: README.mlx を変換する場合
 ### Step 1: Latex に変換
 
 
@@ -21,7 +21,7 @@ Copyright 2020 The MathWorks, Inc.
 
 
 
-Latex に出力した時点で関連画像（live script 内で使用した画像や Figure) は `README_images` というフォルダが作られ、そちらに保存されます。（ここもコマンドで実行する方法はありますが非公式なので：[参考](https://jp.mathworks.com/matlabcentral/answers/396348-how-to-find-and-replace-within-mlx-live-scripts-across-multiple-files)）
+LateX に出力した時点で関連画像（live script 内で使用した画像や Figure) は `README_images` というフォルダが作られ、そちらに保存されます。（ここもコマンドで実行する方法はあります（[参考](https://jp.mathworks.com/matlabcentral/answers/396348-how-to-find-and-replace-within-mlx-live-scripts-across-multiple-files)）が非公式である点ご理解ください）
 
 
 ### Step 2: markdown に変換
@@ -119,7 +119,7 @@ table(rand(3,4))
 ## その他の出力形式
 
 
-すべての形式を試したわけではないのでもしうまく表示されないデータがあれば issue として挙げて頂けると助かります。
+すべての形式を試したわけではないので、出力が複雑になるともしうまく表示されない可能性もあります。もしあれば、お手数ですがコメントもしくは issue として挙げて頂けると助かります。
 
 
   
