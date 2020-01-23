@@ -52,24 +52,11 @@ str = replace(str,"\vspace{1em}"+newline,"\vspace{1em}"+newline+newline);
 % Replace more than three \n to \n\n.
 % 3行以上の空白は2行にしておく
 str = regexprep(str,'\n{3,}','\n\n');
-
 % Devide them into parts by '\n\n'
 % 空白行で要素に分割
 str = strsplit(str,'\n\n')';
 
-% Postprocess 1:
-% a part starts with \end{*} merges to the previous string.
-% \end{~} で始まってしまうケースは前の string と結合
-% known issue：\begin{matlaboutput}
-% idx = find(startsWith(str,'\end'));
-% str(idx-1) = str(idx-1) + newline + str(idx);
-% str(idx) = [];
-
-% Postprocess 2:
-% Delete empty strings
-% str(strlength(str) == 0) = [];
-
-% Postprocess 3:
+% Preprocess 3:
 % The following environments will be merge into one string
 % for the ease of process.
 % MATLABコードが複数行にわたるとうまく処理できないので 対応する \end が見つかるまで連結処理
