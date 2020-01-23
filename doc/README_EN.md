@@ -58,7 +58,7 @@ latex2markdown('README','format','qiita','outputfilename','QiitaDraft');
 Note: Qiita is a tech blog platform in Japanese. Qiita requires markdown to post your articles.
 
 
-## What are the difference betwee Qiita and GitHub?
+## What are the differences between Qiita and GitHub?
 
 
 One is the equations and the other is how to insert the image files. 

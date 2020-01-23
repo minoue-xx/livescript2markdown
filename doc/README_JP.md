@@ -1,19 +1,19 @@
 
-# MATLAB の Live Script から Markdown への自動変換
+# MATLAB �� Live Script ���� Markdown �ւ̎����ϊ�
 
 
 Copyright 2020 The MathWorks, Inc.
 
 
-# はじめに
+# �͂��߂�
 
 
-この README は [ライブスクリプト](https://jp.mathworks.com/help/matlab/matlab_prog/what-is-a-live-script-or-function.html) を Qiita/Github の Markdown に自動変換する関数 `latex2markdown.m` を使って出力されたものです。Live Editor 上で使える機能と GitHub での表示を確認してみてください。
+���� README �� [���C�u�X�N���v�g](https://jp.mathworks.com/help/matlab/matlab_prog/what-is-a-live-script-or-function.html) �� Qiita/Github �� Markdown �Ɏ����ϊ�����֐� `latex2markdown.m` ���g���ďo�͂��ꂽ���̂ł��BLive Editor ��Ŏg����@�\�� GitHub �ł̕\�����m�F���Ă݂Ă��������B
 
 
   
-## 使い方: README.mlx 変換する場合
-### Step 1: Latex に変換
+## �g����: README.mlx ��ϊ�����ꍇ
+### Step 1: Latex �ɕϊ�
 
 
 ![image_0.png](README_JP_images/image_0.png)
@@ -21,25 +21,25 @@ Copyright 2020 The MathWorks, Inc.
 
 
 
-Latex に出力した時点で関連画像（live script 内で使用した画像や Figure) は `README_images` というフォルダが作られ、そちらに保存されます。（ここもコマンドで実行する方法はありますが非公式なので：[参考](https://jp.mathworks.com/matlabcentral/answers/396348-how-to-find-and-replace-within-mlx-live-scripts-across-multiple-files)）
+LateX �ɏo�͂������_�Ŋ֘A�摜�ilive script ���Ŏg�p�����摜�� Figure) �� `README_images` �Ƃ����t�H���_������A������ɕۑ�����܂��B�i�������R�}���h�Ŏ��s������@�͂���܂��i[�Q�l](https://jp.mathworks.com/matlabcentral/answers/396348-how-to-find-and-replace-within-mlx-live-scripts-across-multiple-files)�j��������ł���_���������������j
 
 
-### Step 2: markdown に変換
+### Step 2: markdown �ɕϊ�
 ```matlab
 latex2markdown('README');
 ```
 
 
-で GitHub 向けの markdown で README.md が生成されます。オプションは以下の２つ。
+�� GitHub ������ markdown �� README.md ����������܂��B�I�v�V�����͈ȉ��̂Q�B
 
 
 
-   -  `'format'`: 用途に合わせて `'github'` (既定) もしくは `'qiita'` を指定してください。 
-   -  `'outputfilename'`: 指定しない場合は、live script と同じ名前`.md` のファイルが生成されます。 
+   -  `'format'`: �p�r�ɍ��킹�� `'github'` (����) �������� `'qiita'` ���w�肵�Ă��������B 
+   -  `'outputfilename'`: �w�肵�Ȃ��ꍇ�́Alive script �Ɠ������O`.md` �̃t�@�C������������܂��B 
 
 
 
-例えば Qiita 向けに QiitaDraft.md を作る場合は
+�Ⴆ�� Qiita ������ QiitaDraft.md �����ꍇ��
 
 
 ```matlab
@@ -47,22 +47,22 @@ latex2markdown('README','format','qiita','outputfilename','QiitaDraft');
 ```
 
 
-です。
+�ł��B
 
 
-## Qiita と GitHub の違い
+## Qiita �� GitHub �̈Ⴂ
 
 
-数式と画像の取り扱いです。数式は Qiita では latex が使える一方、GitHub は受け付けないので、CODECOGS ([https://latex.codecogs.com](https://latex.codecogs.com)) を使用しています。また画像の場合、GitHub は画像フォルダも合わせて Push すれば表示されますが、Qiita の場合はエディタ内で改めて Drag \& Drop する必要があります。
+�����Ɖ摜�̎�舵���ł��B������ Qiita �ł� latex ���g�������AGitHub �͎󂯕t���Ȃ��̂ŁACODECOGS ([https://latex.codecogs.com](https://latex.codecogs.com)) ���g�p���Ă��܂��B�܂��摜�̏ꍇ�AGitHub �͉摜�t�H���_�����킹�� Push ����Ε\������܂����AQiita �̏ꍇ�̓G�f�B�^���ŉ��߂� Drag \& Drop ����K�v������܂��B
 
 
   
-# 対応する機能
+# �Ή�����@�\
 
 # MATLAB Code
 
 
-MATLAB code と実行結果のプロットは以下のように表示されます。
+MATLAB code �Ǝ��s���ʂ̃v���b�g�͈ȉ��̂悤�ɕ\������܂��B
 
 
 ```matlab
@@ -81,10 +81,10 @@ plot(x,y);
 
 ![figure_0.png](README_JP_images/figure_0.png)
 
-## テーブル出力
+## �e�[�u���o��
 
 
-table 型変数の出力は以下のような表示になります。
+table �^�ϐ��̏o�͈͂ȉ��̂悤�ȕ\���ɂȂ�܂��B
 
 
 ```matlab
@@ -98,7 +98,7 @@ array2table(rand(3,4))
 
 
 
-ただ、以下のように変数の数とテーブルの列数が合致していない場合は、うまく表示されません。
+�����A�ȉ��̂悤�ɕϐ��̐��ƃe�[�u���̗񐔂����v���Ă��Ȃ��ꍇ�́A���܂��\������܂���B
 
 
 ```matlab
@@ -112,34 +112,34 @@ table(rand(3,4))
 
 
 
-セルがマージされた表の markdown 記載方法があれば教えてください。
+�Z�����}�[�W���ꂽ�\�� markdown �L�ڕ��@������΋����Ă��������B
 
 
   
-## その他の出力形式
+## ���̑��̏o�͌`��
 
 
-すべての形式を試したわけではないのでもしうまく表示されないデータがあれば issue として挙げて頂けると助かります。
+���ׂĂ̌`�����������킯�ł͂Ȃ��̂ŁA�o�͂����G�ɂȂ�Ƃ������܂��\������Ȃ��\��������܂��B��������΁A���萔�ł����R�����g�������� issue �Ƃ��ċ����Ē�����Ə�����܂��B
 
 
   
 
-## コード例としての MATLAB Code
+## �R�[�h��Ƃ��Ă� MATLAB Code
 
 
-実行されない見せるだけの MATLAB code も以下の通り。上の区別がつかない点に注意。
+���s����Ȃ������邾���� MATLAB code ���ȉ��̒ʂ�B��̋�ʂ����Ȃ��_�ɒ��ӁB
 
 
 ```matlab
-% matlab code sample view (実行されないよ）
+% matlab code sample view (���s����Ȃ���j
 x = linspace(0,1,100);
 y = sin(x);
 plot(x,y);
 ```
-# 挿入された画像
+# �}�����ꂽ�摜
 
 
-Live script に挿入された画像は以下の通り。
+Live script �ɑ}�����ꂽ�摜�͈ȉ��̒ʂ�B
 
 
 
@@ -147,10 +147,10 @@ Live script に挿入された画像は以下の通り。
 ![image_1.png](README_JP_images/image_1.png)
 
 
-# 数式
+# ����
 
 
-Live script に挿入された数式は latex 形式で書き出されます。インラインでの数式。 <img src="https://latex.codecogs.com/gif.latex?\inline&space;\sin^2&space;x+\cos^2&space;x=1"/>。複数行だと
+Live script �ɑ}�����ꂽ������ latex �`���ŏ����o����܂��B�C�����C���ł̐����B <img src="https://latex.codecogs.com/gif.latex?\inline&space;\sin^2&space;x+\cos^2&space;x=1"/>�B�����s����
 
 
 
@@ -158,57 +158,57 @@ Live script に挿入された数式は latex 形式で書き出されます。�
 
 
 
-単行の数式
+�P�s�̐���
 
 
 
 <img src="https://latex.codecogs.com/gif.latex?\sin&space;x=-\int&space;\cos&space;xdx"/>
 
-# リスト
+# ���X�g
 
 
-リストも以下の通りです。
-
-
-
-   -  リスト１ 
-   -  リスト２ 
-   -  リスト３ 
+���X�g���ȉ��̒ʂ�ł��B
 
 
 
-数字付きのリストも表示させてみます。
+   -  ���X�g�P 
+   -  ���X�g�Q 
+   -  ���X�g�R 
 
 
 
-   1.  リストA 
-   1.  リストB 
-   1.  リストC 
-
-# 文字装飾
-
-
-Live Editor で対応している組み合わせを全部並べると：**太字**、*イタリック*、下線付き文字、`等幅文字`、***イタリック太字***、**`等幅太字`**、**下線付き太字**、***下線付きイタリック太字***、***`下線付きイタリック等幅太字`***
+�����t���̃��X�g���\�������Ă݂܂��B
 
 
 
+   1.  ���X�gA 
+   1.  ���X�gB 
+   1.  ���X�gC 
 
-下付き文字は現時点で無視されますのでご了承ください。
-
-
-# 引用文
-
-
-Live Editor には引用に該当する機能はないのですが、試しに中央に位置設定された文章は引用扱いにすることにしています。
+# ��������
 
 
-> 引用文も使うかな（by michio) 
+Live Editor �őΉ����Ă���g�ݍ��킹��S�����ׂ�ƁF**����**�A*�C�^���b�N*�A�����t�������A`��������`�A***�C�^���b�N����***�A**`��������`**�A**�����t������**�A***�����t���C�^���b�N����***�A***`�����t���C�^���b�N��������`***
+
+
+
+
+���t�������͌����_�Ŗ�������܂��̂ł��������������B
+
+
+# ���p��
+
+
+Live Editor �ɂ͈��p�ɊY������@�\�͂Ȃ��̂ł����A�����ɒ����Ɉʒu�ݒ肳�ꂽ���͈͂��p�����ɂ��邱�Ƃɂ��Ă��܂��B
+
+
+> ���p�����g�����ȁiby michio) 
 
 
   
 # Feedback
 
 
-何か気になることがあれば遠慮なくコメントください。
+�����C�ɂȂ邱�Ƃ�����Ή����Ȃ��R�����g���������B
 
 

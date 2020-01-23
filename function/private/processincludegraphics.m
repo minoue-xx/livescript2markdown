@@ -1,4 +1,5 @@
 function str = processincludegraphics(str,format,filename)
+% Copyright 2020 The MathWorks, Inc.
 
 % markdown (GitHub): ![string]('path to a image')
 % latex ‚Å‚Í \includegraphics[width=\maxwidth{56.196688409433015em}]{filename}

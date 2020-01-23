@@ -1,19 +1,26 @@
 function [str, idxLiteral] = processLiteralOutput(str)
-%% MATLAB コード部分
-% Qiita では以下の構文
+% Copyright 2020 The MathWorks, Inc.
+
+%% MATLAB Code
+% Latex: 
+% \begin{matlabcode}(code)\end{matlabcode}
+% \begin{verbatim}(code)\end{verbatim}
+% \begin{lstlisting}(code)\end{lstlisting}
+%
+% Markdown
 % ```matlab
-% （コード）
+% （code）
 %```
-% tmp = replace(tmp,"\begin{matlabcode}","```matlab");
-% tmp = replace(tmp,"\end{matlabcode}","```");
-
-
-%% 出力表示について
-% latex では \begin{matlabtoutput}
-% 現時点では最もシンプルな形のみ
-% TODO：その他の出力形式確認
-% tmp = replace(tmp,"\begin{matlaboutput}","```");
-% tmp = replace(tmp,"\end{matlaboutput}","```");
+%% Literal Outputs
+% Latex: 
+% \begin{matlaboutput}(output)\end{matlaboutput}
+%
+% Markdown
+% ```
+%  (output)
+% ```
+% Note: Other outputs (matlabsymbolicoutout, matlabtableoutput)
+% will be processed in processDocumentOutput.m
 
 idx_lstlisting = startsWith(str,"\begin{lstlisting}");
 idx_verbatim = startsWith(str,"\begin{verbatim}");
