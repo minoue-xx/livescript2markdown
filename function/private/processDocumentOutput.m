@@ -14,40 +14,55 @@ str2md = replace(str2md,"\textless{}","<");
 % $ (live script) -> \$ (latex)
 str2md = replace(str2md,"\$","$");
 
-% f: { (live script) -> \} (latex) (leave it)
-% g: } (live script) -> \{ (latex) (leave it)
+% These will be left as they are till the end of this function
+% since these affect the markdown format 
+% { (live script) -> \} (latex) (leave it till end)
+% } (live script) -> \{ (latex) (leave it till end)
 
-%% 2-2: Titile and headings (見出し部分)
-str2md = regexprep(str2md,"\\matlabtitle{([^{}]+)}","# $1");
-str2md = regexprep(str2md,"\\matlabheading{([^{}]+)}","# $1");
-str2md = regexprep(str2md,"\\matlabheadingtwo{([^{}]+)}","## $1");
-str2md = regexprep(str2md,"\\matlabheadingthree{([^{}]+)}","### $1");
+% To deal with \{ and \} inside other commands, it's easier to
+% make regular expression if we change these to letters. (will change it back later)
+str2md = replace(str2md,"\{", "BackslashCurlyBlacketOpen");
+str2md = replace(str2md,"\}", "BackslashCurlyBlacketClose");
 
-%% 2-3: Text decoration (文字装飾部分)
-% \textbf{太字}
-% \textit{イタリック}
-% \underline{下線付き文字}
-% \texttt{等幅文字}
-% and conbinations
-% \textit{\textbf{イタリック太字}}
-% \texttt{\textbf{等幅太字}}
-% \underline{\textbf{下線付き太字}}、
-% \underline{\textit{\textbf{下線付きイタリック太字}}}、
-% \texttt{\underline{\textit{\textbf{下線付きイタリック等幅太字}}}}
+%% 2-2: Text decoration (文字装飾部分)
+% \textbf{bold}
+% \textit{italic}
+% \underline{underline}
+% \texttt{equispace}
+% and all the possible conbinations of these four.
 
 % Need to keep this execution sequence
 str2md = regexprep(str2md,"\\textbf{([^{}]+)}","**$1**");
 str2md = regexprep(str2md,"\\textit{([^{}]+)}","*$1*");
 str2md = regexprep(str2md,"\\underline{([^{}]+)}","$1"); % Ignore underline (下線は無視）
 str2md = regexprep(str2md,"\\texttt{(\*{0,3})([^*{}]+)(\*{0,3})}","$1`$2`$3");
-% Note on the processing \testt
-% str2md = regexprep(str2md,"\\texttt{([^{}]+)}","`$1`");
+
+% Note on the processing \texttt
+% Example: 
+% str = "\\texttt{\\textbf{EquispaceBold}}";
+% str = regexprep(str,"\\textbf{([^{}]+)}","**$1**");
+% str = regexprep(str,"\\texttt{([^{}]+)}","`$1`");
 % gives
-% `**等幅太字**`
+% `**EquispaceBold**`
 % which does not work. ` ` needs to be most inside.
 % `` が最も外側にくるが一番内側にある必要がある。
 
-%% 2-4: Quotation (引用パラグラフ)
+%% 2-3: Titile and headings (見出し部分)
+str2md = regexprep(str2md,"\\matlabtitle{([^{}]+)}","# $1");
+str2md = regexprep(str2md,"\\matlabheading{([^{}]+)}","# $1");
+str2md = regexprep(str2md,"\\matlabheadingtwo{([^{}]+)}","## $1");
+str2md = regexprep(str2md,"\\matlabheadingthree{([^{}]+)}","### $1");
+
+%% 2-4: Hyperlinks (ハイパーリンク)
+% Markdown: [string](http://xxx.com)
+% latex: \href{http://xxx.com}{string}
+str2md = regexprep(str2md,"\\href{([^{}]+)}{([^{}]+)}","[$2]($1)");
+
+% Put \{ and \{ back.
+str2md = replace(str2md,"BackslashCurlyBlacketOpen","\{");
+str2md = replace(str2md, "BackslashCurlyBlacketClose","\}");
+
+%% 2-5: Quotation (引用パラグラフ)
 % Markdown: >
 % Latex:
 % \begin{par}
@@ -60,7 +75,7 @@ idxNonGraphics = ~contains(str2md,"\includegraphics");
 str2md(idxNonGraphics) = replace(str2md(idxNonGraphics),...
     "\begin{par}"+newline+"\begin{center}"+newline,"> ");
 
-%% 2-5: Delete unnecessary commands (不要コマンドを削除)
+%% 2-6: Delete unnecessary commands (不要コマンドを削除)
 % Delete table of contents: 目次は現時点で削除（TODO）
 % ex: \label{H_D152BAC0}
 str2md = regexprep(str2md,"\\matlabtableofcontents{([^{}]+)}"+newline, "");
@@ -73,11 +88,6 @@ str2md = erase(str2md,"\begin{flushleft}");
 str2md = erase(str2md,"\end{flushleft}");
 str2md = erase(str2md,"\begin{center}");
 str2md = erase(str2md,"\end{center}");
-
-%% 2-6: Hyperlinks (ハイパーリンク)
-% Markdown: [string](http://xxx.com)
-% latex: \href{http://xxx.com}{string}
-str2md = regexprep(str2md,"\\href{([^{}]+)}{([^{}]+)}","[$2]($1)");
 
 %% 2-7: Unordered list (リスト)
 % markdown: add - to each item
@@ -118,20 +128,9 @@ str2md(itemizeIdx) = partsMarkdown;
 % ans =
 %     $\displaystyle -\cos \left(x\right)$
 % \end{matlabsymbolicoutput}
-% str2md = erase(str2md,"\begin{matlabsymbolicoutput}"+newline);
-% str2md = erase(str2md,"\end{matlabsymbolicoutput}");
-% str2md = erase(str2md,"\hskip1em");
-
-symoutIdx = contains(str2md,["\begin{matlabsymbolicoutput}","\end{matlabsymbolicoutput}"]);
-symoutParts = str2md(symoutIdx);
-tmp = erase(symoutParts,"\begin{matlabsymbolicoutput}"+newline);
-tmp = replace(tmp,"$\displaystyle","$$");
-partsMarkdown = replace(tmp,"$"+newline+"\end{matlabsymbolicoutput}","$$");
-str2md(symoutIdx) = partsMarkdown;
-% This part will be processed by processEquations.m
-
-%%
-% latex:
+%
+% and
+%
 % \begin{matlabsymbolicoutput}
 % a = 
 %     $\displaystyle \left(\begin{array}{cccc}
@@ -142,7 +141,13 @@ str2md(symoutIdx) = partsMarkdown;
 % \end{array}\right)$
 % \end{matlabsymbolicoutput}
 
-
+symoutIdx = contains(str2md,["\begin{matlabsymbolicoutput}","\end{matlabsymbolicoutput}"]);
+symoutParts = str2md(symoutIdx);
+tmp = erase(symoutParts,"\begin{matlabsymbolicoutput}"+newline);
+tmp = replace(tmp,"$\displaystyle","$$");
+partsMarkdown = replace(tmp,"$"+newline+"\end{matlabsymbolicoutput}","$$");
+str2md(symoutIdx) = partsMarkdown;
+% NOTE: This part will be processed by processEquations.m
 
 %% 2-10: table output (table 型データの出力)
 % markdown:
@@ -202,3 +207,7 @@ for ii=1:sum(idxTblOutput)
     tableMD(ii) = strjoin([header,format,body],newline);
 end
 str2md(idxTblOutput) = tableMD;
+
+%% finish up
+str2md = replace(str2md,"\{","{");
+str2md = replace(str2md,"\}","}");

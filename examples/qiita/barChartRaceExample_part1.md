@@ -1,10 +1,6 @@
 # ぬめぬめ動く棒グラフ Bar Chart Race を描いてみよう: 準備編
-
-
-Copyright 2020 The MathWorks, Inc.
-
-
 # 使い方
+Copyright 2020 The MathWorks, Inc.
 ```matlab
 livescript2markdown('barChartRaceExample_part1','format','qiita');
 ```
@@ -15,7 +11,7 @@ livescript2markdown('barChartRaceExample_part1','format','qiita');
 
 
 
-**注意：画像部分は別途 Drag \& Drop で Qiita に載せる必要があります。**
+注意：画像部分は別途 Drag \& Drop で Qiita に載せる必要があります。
 
 
 # はじめに
@@ -163,7 +159,6 @@ handle_bar.BarWidth
 ```
 ans = 0.8000
 ```
-# `BarWidth` プロパティ
 
 
 ではこれをいくつにすればいいのか。間隔がちょうど１だった時には 0.8 でいい感じの表示でした。
