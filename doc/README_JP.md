@@ -21,7 +21,17 @@ Copyright 2020 The MathWorks, Inc.
 
 
 
-LateX に出力した時点で関連画像（live script 内で使用した画像や Figure) は `README_images` というフォルダが作られ、そちらに保存されます。（ここもコマンドで実行する方法はあります（[参考](https://jp.mathworks.com/matlabcentral/answers/396348-how-to-find-and-replace-within-mlx-live-scripts-across-multiple-files)）が非公式である点ご理解ください）
+LateX に出力した時点で関連画像（live script 内で使用した画像や Figure) は `README_images` というフォルダが作られ、そちらに保存されます。
+
+
+
+
+**WARNING**: Live script を実行した直後にそのままエクスポートすると、画像が eps として出力され、また Figure が多い場合（20個以上）ある場合にはエラーが発生するケースが確認されています。**実行した直後の livescript はいったん閉じ、再度開いたうえで LaTeX に出力するとエラーは回避できます。**
+
+
+
+
+（ここもコマンドで実行する方法はあります（[参考](https://jp.mathworks.com/matlabcentral/answers/396348-how-to-find-and-replace-within-mlx-live-scripts-across-multiple-files)）が非公式である点ご理解ください）
 
 
 ### Step 2: markdown に変換
