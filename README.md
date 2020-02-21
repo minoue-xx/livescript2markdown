@@ -22,6 +22,7 @@ I suggest that **you close the script and reopen and then export to latex.**
   
 ***
 ### Feedback
+
 Hope it accelerates your MATLAB life. Any comment and suggestions are always appreciated.
 
 
