@@ -12,7 +12,7 @@ This repository provides a functions to convert your live scripts to markdown fi
 
 I've checked the function with multiple live scripts but please note that it's not perfect. It's expected that you need some manual editing.
 
-# NOTE (2020/02/10)
+## NOTE (2020/02/10)
 
 When exporting to LaTeX right after running the livescript, it's observed that the figures will be exported as eps files or not at all
 if the livescript contains more than 20 figures.
@@ -20,7 +20,8 @@ if the livescript contains more than 20 figures.
 I suggest that **you close the script and reopen and then export to latex.**
 
   
-# Feedback
+***
+### Feedback
 
 Hope it accelerates your MATLAB life. Any comment and suggestions are always appreciated.
 

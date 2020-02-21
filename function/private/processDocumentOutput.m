@@ -13,6 +13,8 @@ str2md = replace(str2md,"\textgreater{}",">");
 str2md = replace(str2md,"\textless{}","<");
 % $ (live script) -> \$ (latex)
 str2md = replace(str2md,"\$","$");
+% % (live script) -> \% (latex)
+str2md = replace(str2md,"\%","%");
 
 % These will be left as they are till the end of this function
 % since these affect the markdown format 
@@ -47,16 +49,16 @@ str2md = regexprep(str2md,"\\texttt{(\*{0,3})([^*{}]+)(\*{0,3})}","$1`$2`$3");
 % which does not work. ` ` needs to be most inside.
 % `` が最も外側にくるが一番内側にある必要がある。
 
-%% 2-3: Titile and headings (見出し部分)
+%% 2-3: Hyperlinks (ハイパーリンク)
+% Markdown: [string](http://xxx.com)
+% latex: \href{http://xxx.com}{string}
+str2md = regexprep(str2md,"\\href{([^{}]+)}{([^{}]+)}","[$2]($1)");
+
+%% 2-4: Titile and headings (見出し部分)
 str2md = regexprep(str2md,"\\matlabtitle{([^{}]+)}","# $1");
 str2md = regexprep(str2md,"\\matlabheading{([^{}]+)}","# $1");
 str2md = regexprep(str2md,"\\matlabheadingtwo{([^{}]+)}","## $1");
 str2md = regexprep(str2md,"\\matlabheadingthree{([^{}]+)}","### $1");
-
-%% 2-4: Hyperlinks (ハイパーリンク)
-% Markdown: [string](http://xxx.com)
-% latex: \href{http://xxx.com}{string}
-str2md = regexprep(str2md,"\\href{([^{}]+)}{([^{}]+)}","[$2]($1)");
 
 % Put \{ and \{ back.
 str2md = replace(str2md,"BackslashCurlyBlacketOpen","\{");
