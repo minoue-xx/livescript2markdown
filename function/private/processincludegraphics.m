@@ -14,15 +14,15 @@ imagedir = strrep(imagedir, '\', '/');
 
 % for each images
 for ii=1:length(imageParts)
-    fileid = regexp(imageParts(ii),"\\includegraphics\[[^\]]+\]{([^{}]+)}", "tokens");
-    imagefilename = ls(imagedir + fileid + "*");
+    imagefilename = regexp(imageParts(ii),"\\includegraphics\[[^\]]+\]{([^{}]+)}", "tokens");
+%     imagefilename = ls(imagedir + fileid + "*");
     
     switch format
         case 'qiita'
             % Qiita に移行する際は、画像ファイルを該当箇所に drag & drop する必要
             % TODO コメント追記：幅指定する場合には
             % <img src="" alt="attach:cat" title="attach:cat" width=500px>
-            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+fileid+"}",...
+            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+imagefilename+"}",...
                 "<--" + newline ...
                 + "**Please drag & drop an image file here**" + newline ...
                 + "Filename: **"+imagedir+imagefilename + "**" + newline ...
@@ -32,7 +32,7 @@ for ii=1:length(imageParts)
             
         case 'github'
             %  ![string]('path to a image')
-            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+fileid+"}",...
+            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+imagefilename+"}",...
                 "!["+imagefilename+"]("+imagedir+imagefilename+")");
     end
 end

@@ -10,7 +10,13 @@ arguments
 end
 
 % Latex filename
-latexfile = filename + ".tex";
+[filepath,name,ext] = fileparts(filename);
+
+if ext == "" % if without extention, add .tex
+    latexfile = fullfile(filepath, name + ".tex");
+else %
+    latexfile = filename;
+end
 
 % check if latexfile exists
 assert(exist(latexfile,'file')>0, ...
@@ -85,7 +91,7 @@ str2md = processDocumentOutput(str2md);
 str2md = processEquations(str2md, options.format);
 
 % includegraphics (‰æ‘œ•”•ª)
-str2md = processincludegraphics(str2md, options.format, filename);
+str2md = processincludegraphics(str2md, options.format, name);
 
 % Apply vertical space
 % markdown: two spaces for linebreak
@@ -102,6 +108,6 @@ fileID = fopen(mdfile,'w');
 fprintf(fileID,'%s\n',strmarkdown);
 fclose(fileID);
 
-disp("Coverting latex to qiita markdown is complete");
+disp("Coverting latex to markdown is complete");
 disp(mdfile);
-disp("Note: Related images are saved in " + filename + "_images");
+disp("Note: Related images are saved in " + name + "_images");
