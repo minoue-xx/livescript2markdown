@@ -1,26 +1,33 @@
-function str = processincludegraphics(str,format,filename)
+function str = processincludegraphics(str,format,filename,filepath)
 % Copyright 2020 The MathWorks, Inc.
 
+% Note: There are two cases in the tex
+% 1: inserted image: \includegraphics[width=\maxwidth{64.52584044154541em}]{image_0}
+% 2: generated figure: \includegraphics[width=\maxwidth{52.78474661314601em}]{figure_0.png}
+%
+% Inserted images needs to 
+
 % markdown (GitHub): ![string]('path to a image')
-% latex ‚Å‚Í \includegraphics[width=\maxwidth{56.196688409433015em}]{filename}
+% latex ã§ã¯ \includegraphics[width=\maxwidth{56.196688409433015em}]{filename}
 imageIdx = contains(str,"\includegraphics");
 imageParts = str(imageIdx);
 
 % When exported latex from live script, figures and inserted images
 % are saved in 'imagedir' as image files.
-% latex ‚ğ¶¬‚µ‚½“_‚Å Figure “™‚Í‰æ‘œ‚Æ‚µ‚Äimagedir ‚É•Û‘¶‚³‚ê‚Ä‚¢‚é
+% latex ã‚’ç”Ÿæˆã—ãŸæ™‚ç‚¹ã§ Figure ç­‰ã¯ç”»åƒã¨ã—ã¦imagedir ã«ä¿å­˜ã•ã‚Œã¦ã„ã‚‹
 imagedir = filename + "_images/";
 imagedir = strrep(imagedir, '\', '/');
 
 % for each images
 for ii=1:length(imageParts)
-    imagefilename = regexp(imageParts(ii),"\\includegraphics\[[^\]]+\]{([^{}]+)}", "tokens");
-%     imagefilename = ls(imagedir + fileid + "*");
+    fileid = regexp(imageParts(ii),"\\includegraphics\[[^\]]+\]{([^{}]+)}", "tokens");
+    imagefilename = ls(fullfile(filepath,imagedir,fileid + "*")); % get the actual filename with extention
+
     
     switch format
         case 'qiita'
-            % Qiita ‚ÉˆÚs‚·‚éÛ‚ÍA‰æ‘œƒtƒ@ƒCƒ‹‚ğŠY“–‰ÓŠ‚É drag & drop ‚·‚é•K—v
-            % TODO ƒRƒƒ“ƒg’Ç‹LF•w’è‚·‚éê‡‚É‚Í
+            % Qiita ã«ç§»è¡Œã™ã‚‹éš›ã¯ã€ç”»åƒãƒ•ã‚¡ã‚¤ãƒ«ã‚’è©²å½“ç®‡æ‰€ã« drag & drop ã™ã‚‹å¿…è¦
+            % TODO ã‚³ãƒ¡ãƒ³ãƒˆè¿½è¨˜ï¼šå¹…æŒ‡å®šã™ã‚‹å ´åˆã«ã¯
             % <img src="" alt="attach:cat" title="attach:cat" width=500px>
             imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+imagefilename+"}",...
                 "<--" + newline ...
