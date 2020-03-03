@@ -12,6 +12,10 @@ end
 % Latex filename
 [filepath,name,ext] = fileparts(filename);
 
+if filepath == ""
+    filepath = pwd;
+end
+    
 if ext == "" % if without extention, add .tex
     latexfile = fullfile(filepath, name + ".tex");
 else %
@@ -91,7 +95,7 @@ str2md = processDocumentOutput(str2md);
 str2md = processEquations(str2md, options.format);
 
 % includegraphics (‰æ‘œ•”•ª)
-str2md = processincludegraphics(str2md, options.format, name);
+str2md = processincludegraphics(str2md, options.format, name, filepath);
 
 % Apply vertical space
 % markdown: two spaces for linebreak

@@ -1,5 +1,11 @@
-function str = processincludegraphics(str,format,filename)
+function str = processincludegraphics(str,format,filename,filepath)
 % Copyright 2020 The MathWorks, Inc.
+
+% Note: There are two cases in the tex
+% 1: inserted image: \includegraphics[width=\maxwidth{64.52584044154541em}]{image_0}
+% 2: generated figure: \includegraphics[width=\maxwidth{52.78474661314601em}]{figure_0.png}
+%
+% Inserted images needs to 
 
 % markdown (GitHub): ![string]('path to a image')
 % latex では \includegraphics[width=\maxwidth{56.196688409433015em}]{filename}
@@ -14,15 +20,15 @@ imagedir = strrep(imagedir, '\', '/');
 
 % for each images
 for ii=1:length(imageParts)
-    imagefilename = regexp(imageParts(ii),"\\includegraphics\[[^\]]+\]{([^{}]+)}", "tokens");
-%     imagefilename = ls(imagedir + fileid + "*");
+    fileid = regexp(imageParts(ii),"\\includegraphics\[[^\]]+\]{([^{}]+)}", "tokens");
+    imagefilename = ls(fullfile(filepath,imagedir,fileid + "*")); % get the actual filename with extention
     
     switch format
         case 'qiita'
             % Qiita に移行する際は、画像ファイルを該当箇所に drag & drop する必要
             % TODO コメント追記：幅指定する場合には
             % <img src="" alt="attach:cat" title="attach:cat" width=500px>
-            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+imagefilename+"}",...
+            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+fileid+"}",...
                 "<--" + newline ...
                 + "**Please drag & drop an image file here**" + newline ...
                 + "Filename: **"+imagedir+imagefilename + "**" + newline ...
@@ -32,7 +38,7 @@ for ii=1:length(imageParts)
             
         case 'github'
             %  ![string]('path to a image')
-            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+imagefilename+"}",...
+            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+fileid+"}",...
                 "!["+imagefilename+"]("+imagedir+imagefilename+")");
     end
 end
