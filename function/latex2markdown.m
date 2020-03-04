@@ -12,7 +12,6 @@ end
 % Latex filename
 [filepath,name,ext] = fileparts(filename);
 
-
 if filepath == ""
     filepath = pwd;
 end

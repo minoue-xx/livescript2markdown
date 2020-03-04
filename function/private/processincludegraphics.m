@@ -22,7 +22,6 @@ imagedir = strrep(imagedir, '\', '/');
 for ii=1:length(imageParts)
     fileid = regexp(imageParts(ii),"\\includegraphics\[[^\]]+\]{([^{}]+)}", "tokens");
     imagefilename = ls(fullfile(filepath,imagedir,fileid + "*")); % get the actual filename with extention
-
     
     switch format
         case 'qiita'
