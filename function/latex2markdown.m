@@ -10,7 +10,17 @@ arguments
 end
 
 % Latex filename
-latexfile = filename + ".tex";
+[filepath,name,ext] = fileparts(filename);
+
+if filepath == ""
+    filepath = pwd;
+end
+    
+if ext == "" % if without extention, add .tex
+    latexfile = fullfile(filepath, name + ".tex");
+else %
+    latexfile = filename;
+end
 
 % check if latexfile exists
 assert(exist(latexfile,'file')>0, ...
@@ -38,7 +48,7 @@ str = extractBetween(str,"\begin{document}","\end{document}");
 % Add 'newline' to the end of the following.
 % \end{lstlisting}, \end{verbatim}, \end{matlabcode}, \end{matlaboutput},\end{center}
 % \end{matlabtableoutput}, \end{matlabsymbolicoutput}  \vspace{1em}
-% —v‘f‚²‚Æ‚É•ªŠ„‚µ‚â‚·‚¢‚æ‚¤‚É \end ‚ÌŒã‚É‰üs‚ª–³‚¢ê‡‚Í‚P‚Â’Ç‰Á
+% è¦ç´ ã”ã¨ã«åˆ†å‰²ã—ã‚„ã™ã„ã‚ˆã†ã« \end ã®å¾Œã«æ”¹è¡ŒãŒç„¡ã„å ´åˆã¯ï¼‘ã¤è¿½åŠ 
 str = replace(str,"\end{lstlisting}"+newline,"\end{lstlisting}"+newline+newline);
 str = replace(str,"\end{verbatim}"+newline,"\end{verbatim}"+newline+newline);
 str = replace(str,"\end{matlabcode}"+newline,"\end{matlabcode}"+newline+newline);
@@ -50,16 +60,16 @@ str = replace(str,"\vspace{1em}"+newline,"\vspace{1em}"+newline+newline);
 
 % Preprocess 2:
 % Replace more than three \n to \n\n.
-% 3sˆÈã‚Ì‹ó”’‚Í2s‚É‚µ‚Ä‚¨‚­
+% 3è¡Œä»¥ä¸Šã®ç©ºç™½ã¯2è¡Œã«ã—ã¦ãŠã
 str = regexprep(str,'\n{3,}','\n\n');
 % Devide them into parts by '\n\n'
-% ‹ó”’s‚Å—v‘f‚É•ªŠ„
+% ç©ºç™½è¡Œã§è¦ç´ ã«åˆ†å‰²
 str = strsplit(str,'\n\n')';
 
 % Preprocess 3:
 % The following environments will be merge into one string
 % for the ease of process.
-% MATLABƒR[ƒh‚ª•¡”s‚É‚í‚½‚é‚Æ‚¤‚Ü‚­ˆ—‚Å‚«‚È‚¢‚Ì‚Å ‘Î‰‚·‚é \end ‚ªŒ©‚Â‚©‚é‚Ü‚Å˜AŒ‹ˆ—
+% MATLABã‚³ãƒ¼ãƒ‰ãŒè¤‡æ•°è¡Œã«ã‚ãŸã‚‹ã¨ã†ã¾ãå‡¦ç†ã§ããªã„ã®ã§ å¯¾å¿œã™ã‚‹ \end ãŒè¦‹ã¤ã‹ã‚‹ã¾ã§é€£çµå‡¦ç†
 % \begin{verbatim}
 % \begin{lstlisting}
 % \begin{matlabcode}
@@ -81,11 +91,11 @@ str = mergeSameEnvironments(str,"matlabsymbolicoutput");
 str2md = str(~idxLiteral);
 str2md = processDocumentOutput(str2md);
 
-% Equations (”®•”•ª)
+% Equations (æ•°å¼éƒ¨åˆ†)
 str2md = processEquations(str2md, options.format);
 
-% includegraphics (‰æ‘œ•”•ª)
-str2md = processincludegraphics(str2md, options.format, filename);
+% includegraphics (ç”»åƒéƒ¨åˆ†)
+str2md = processincludegraphics(str2md, options.format, name, filepath);
 
 % Apply vertical space
 % markdown: two spaces for linebreak
@@ -96,12 +106,12 @@ str(~idxLiteral) = str2md;
 %% Done! Merge them together
 strmarkdown = join(str,newline);
 
-%% File outputƒtƒ@ƒCƒ‹o—Í
+%% File outputãƒ•ã‚¡ã‚¤ãƒ«å‡ºåŠ›
 mdfile = options.outputfilename + ".md";
 fileID = fopen(mdfile,'w');
 fprintf(fileID,'%s\n',strmarkdown);
 fclose(fileID);
 
-disp("Coverting latex to qiita markdown is complete");
+disp("Coverting latex to markdown is complete");
 disp(mdfile);
-disp("Note: Related images are saved in " + filename + "_images");
+disp("Note: Related images are saved in " + name + "_images");
