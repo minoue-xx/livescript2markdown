@@ -14,7 +14,7 @@ imageParts = str(imageIdx);
 
 % When exported latex from live script, figures and inserted images
 % are saved in 'imagedir' as image files.
-% latex を生成した時点で Figure 等は画像としてimagedir に保存されている
+% latex を生成した時点で Figure 等�?�画像としてimagedir に保存されて�?�?
 imagedir = filename + "_images/";
 imagedir = strrep(imagedir, '\', '/');
 
@@ -25,8 +25,8 @@ for ii=1:length(imageParts)
     
     switch format
         case 'qiita'
-            % Qiita に移行する際は、画像ファイルを該当箇所に drag & drop する必要
-            % TODO コメント追記：幅指定する場合には
+            % Qiita に移行する際は、画像ファイルを該当�?�?に drag & drop する�?�?
+            % TODO コメント追記：�?�?定する�?�合には
             % <img src="" alt="attach:cat" title="attach:cat" width=500px>
             imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+imagefilename+"}",...
                 "<--" + newline ...
@@ -38,7 +38,7 @@ for ii=1:length(imageParts)
             
         case 'github'
             %  ![string]('path to a image')
-            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+imagefilename+"}",...
+            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+fileid{:}+"}",...
                 "!["+imagefilename+"]("+imagedir+imagefilename+")");
     end
 end
