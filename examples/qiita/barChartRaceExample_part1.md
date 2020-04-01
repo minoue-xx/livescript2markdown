@@ -1,33 +1,39 @@
-# �ʂ߂ʂߓ����_�O���t Bar Chart Race ��`���Ă݂悤: ������
-# �g����
+# ぬめぬめ動く棒グラフ Bar Chart Race を描いてみよう: 準備編
+
+
 Copyright 2020 The MathWorks, Inc.
-```matlab
+
+
+# 使い方
+
+```matlab:Code(Display)
 livescript2markdown('barChartRaceExample_part1','format','qiita');
 ```
 
 
-�ŏo�͂��� Markdown �� Qiita �ł̕\��������F[https://qiita.com/eigs/items/62fbc0b6bdc5e7094abf](https://qiita.com/eigs/items/62fbc0b6bdc5e7094abf)
+
+で出力した Markdown の Qiita での表示こちら：[https://qiita.com/eigs/items/62fbc0b6bdc5e7094abf](https://qiita.com/eigs/items/62fbc0b6bdc5e7094abf)
 
 
 
 
-���ӁF�摜�����͕ʓr Drag \& Drop �� Qiita �ɍڂ���K�v������܂��B
+**注意：画像部分は別途 Drag \& Drop で Qiita に載せる必要があります。**
 
 
-# �͂��߂�
+# はじめに
 
 
-�ŋ߂悭�݂邱��ȃv���b�g�F�e�f�[�^�̎��n��ω������ʂƂƂ��ɕ\������v���b�g�ł��B���ԂƂƂ��ɏ��ʂ�����ւ��̂� Bar Chart Race �Ƃ��Ă΂�Ă���i�H�j�悤�ŁA��������Ƃ����ȃf�[�^�̉������݂��܂��B
-
-
-
-
-����� MATLAB �ŏ����Ȃ��̂��A�A�Ƃ������������Ă����C�����܂����̂ŁA����Ă݂܂����B
+最近よくみるこんなプロット：各データの時系列変化を順位とともに表現するプロットです。時間とともに順位が入れ替わるので Bar Chart Race とか呼ばれている（？）ようで、検索するといろんなデータの可視化がみられます。
 
 
 
 
-����͏����҂Ƃ��ĕ`��ɕK�v�ȗv�f��������Ă��邩�̊m�F�����܂��B `barh` �֐��̋@�\���m�F���Ă݂܂��傤�B
+これを MATLAB で書けないのか、、という声が答えてきた気がしましたので、やってみました。
+
+
+
+
+今回は準備編として描画に必要な要素がそろっているかの確認をします。 `barh` 関数の機能を確認してみましょう。
 
 
 
@@ -40,18 +46,20 @@ If you want to set the image size use the following command
 -->
 
 
-# ���_�O���t�̃v���b�g
+# 横棒グラフのプロット
 
 
-�܂��͖_�O���t `barh` �������Ă݂܂��B
+まずは棒グラフ `barh` を書いてみます。
 
 
-```matlab
+
+```matlab:Code
 clear; close all
 x = 1:5;
 y = (1:5)/10;
 handle_bar = barh(x,y);
 ```
+
 
 <--
 **Please drag & drop an image file here**
@@ -62,26 +70,29 @@ If you want to set the image size use the following command
 
 
 
-�ȒP�ł��ˁBx ���c�̈ʒu�Ay ���_�̒��������߂܂��B
+簡単ですね。x が縦の位置、y が棒の長さを決めます。
 
 
 
 
-`barh` ����₱�����̂� `x` ���c����ł̈ʒu�A`y `���Ή�����_�̒����ł���_�B�����I�� `x` �� `y` ���t�]���Ă���悤�Ɋ�����_�B
+`barh` がややこしいのは `x` が縦軸上での位置、`y `が対応する棒の長さである点。直感的に `x` と `y` が逆転しているように感じる点。
 
 
-# �_�O���t�̖_�̈ʒu���w��i�����j
+# 棒グラフの棒の位置を指定（整数）
 
 
-�v���p�e�B�����Ă݂܂��B
+プロパティを見てみます。
 
 
-```matlab
+
+```matlab:Code
 handle_bar
 ```
-```
+
+
+```text:Output
 handle_bar = 
-  Bar �̃v���p�e�B:
+  Bar のプロパティ:
 
     BarLayout: 'grouped'
      BarWidth: 0.8000
@@ -91,17 +102,20 @@ handle_bar =
         XData: [1 2 3 4 5]
         YData: [0.1000 0.2000 0.3000 0.4000 0.5000]
 
-  ���ׂẴv���p�e�B ��\��
+  すべてのプロパティ を表示
 
 ```
 
 
-�_�O���t�̈ʒu�i�c�����j�� `XData` �v���p�e�B�ŕύX�ł������ł��B�Ⴆ�� 2 �� 3 �����ւ��Ă݂܂��B
+
+棒グラフの位置（縦方向）は `XData` プロパティで変更できそうです。例えば 2 と 3 を入れ替えてみます。
 
 
-```matlab
+
+```matlab:Code
 handle_bar.XData = [1,3,2,4,5];
 ```
+
 
 <--
 **Please drag & drop an image file here**
@@ -112,23 +126,25 @@ If you want to set the image size use the following command
 
 
 
-3 �� 2 �̈ʒu���t�]���܂����B
+3 と 2 の位置が逆転しました。
 
 
-# �_�O���t�̖_�̈ʒu���w��i�����_�j
+# 棒グラフの棒の位置を指定（小数点）
 
 
-�����_�i�s�ϓ��Ȉʒu�w��j���ł���΁A���ʂ�����ւ��J�ڂ�\���ł������ȋC�����܂��B
+小数点（不均等な位置指定）もできれば、順位が入れ替わる遷移を表現できそうな気がします。
 
 
 
 
-2 �� 2.8 �� 3 �� 2.2 �ɂ��āA�����������\�����Ă݂܂��B
+2 を 2.8 に 3 を 2.2 にして、すれ違った後を表現してみます。
 
 
-```matlab
+
+```matlab:Code
 handle_bar.XData = [1,2.8,2.2,4,5];
 ```
+
 
 <--
 **Please drag & drop an image file here**
@@ -137,70 +153,85 @@ If you want to set the image size use the following command
 <img src=" alt="attach:cat" title="attach:cat" width=500px>
 -->
 
-## ������ƈႤ
+## ちょっと違う
 
 
-�ʒu���ς�����̂͂��������������������B�_�̕����ׂ��I 
-
-
-
-
-����� `barh `�֐����C�𗘂����Ă���āA���ꂼ��̖_���d�Ȃ�Ȃ��悤�ɕ`�悷�邽�߂ł��B�܁A�C�����͂킩���ł��Ȃ��B
+位置が変わったのはいいが何かがおかしい。棒の幅が細い！ 
 
 
 
 
-������ŊJ����ɂ� `BarWidth` �v���p�e�B�ł��B����l�� `0.8` �ł���AMATLAB �ŏ����Ԋu���󂯂Ċe�o�[���\������܂��B���̃v���p�e�B�� `1` �ɐݒ肷��ƁA�o�[���m�����ԂȂ��\������܂��B�Q�ƁF[Bar �̃v���p�e�B](https://www.mathworks.com/help/matlab/ref/matlab.graphics.chart.primitive.bar-properties.html)
+これは `barh `関数が気を利かせてくれて、それぞれの棒が重ならないように描画するためです。ま、気持ちはわからんでもない。
 
 
-```matlab
+
+
+ここを打開するには `BarWidth` プロパティです。既定値は `0.8` であり、MATLAB で少し間隔を空けて各バーが表示されます。このプロパティを `1` に設定すると、バー同士が隙間なく表示されます。参照：[Bar のプロパティ](https://www.mathworks.com/help/matlab/ref/matlab.graphics.chart.primitive.bar-properties.html)
+
+
+
+```matlab:Code
 handle_bar.BarWidth
 ```
-```
+
+
+```text:Output
 ans = 0.8000
 ```
 
-
-�ł͂���������ɂ���΂����̂��B�Ԋu�����傤�ǂP���������ɂ� 0.8 �ł��������̕\���ł����B
-
+# `BarWidth` プロパティ
 
 
-
-�ł͒����I�Ƀf�[�^�̕��ɔ���Ⴗ��悤�� `BarWidth` �̒l��傫������΂����̂ł́H
+ではこれをいくつにすればいいのか。間隔がちょうど１だった時には 0.8 でいい感じの表示でした。
 
 
 
 
-����Ă݂܂��B�����_�ł�
+では直感的にデータの幅に反比例するように `BarWidth` の値を大きくすればいいのでは？
 
 
-```matlab
+
+
+やってみます。現時点では
+
+
+
+```matlab:Code
 tmp = handle_bar.XData
 ```
-```
+
+
+```text:Output
 tmp = 1x5    
     1.0000    2.8000    2.2000    4.0000    5.0000
 
 ```
 
 
-�Ƃ����ʒu�֌W�Ȃ̂ŁA�ł��߂��ʒu�ɂ���_���m�̋������g���Čv�Z���Ă݂܂��傤�B
+
+という位置関係なので、最も近い位置にある棒同士の距離を使って計算してみましょう。
 
 
-```matlab
+
+```matlab:Code
 scaleWidth = min(diff(sort(tmp)))
 ```
-```
+
+
+```text:Output
 scaleWidth = 0.6000
 ```
 
 
-`��x sort` ���Ă���̂́A�t�]���Ă邩��ł��B���̒l���g���� `BarWidth` �̒l������l�� 0.8 �̂悤�Ȍ��h���ɂȂ�悤�ɕς��Ă݂܂��B
+
+`一度 sort` しているのは、逆転してるからです。この値を使って `BarWidth` の値を既定値の 0.8 のような見栄えになるように変えてみます。
 
 
-```matlab
+
+```matlab:Code
 handle_bar.BarWidth = 0.8/scaleWidth;
 ```
+
 
 <--
 **Please drag & drop an image file here**
@@ -211,64 +242,76 @@ If you want to set the image size use the following command
 
 
 
-�����A�ł������ۂ��B
+おぉ、できたっぽい。
 
 
 
 
-����ŁAy ���̈ʒu�������L���O�i���ʁj�ɊY������悤�� `XData` �v���p�e�B��ύX����΂����ł��ˁB�ʂ߂ʂߑJ�ڂ�����ɂ́A�����L���O�̓���ւ���������}���Ă�����Ƃ����ʂ�����ւ��悤�ɂ���΁A�ʂ߂ʂߑJ�ڂ��\���ł������ȋC�����Ă��܂����I
+これで、y 軸の位置をランキング（順位）に該当するように `XData` プロパティを変更すればいいですね。ぬめぬめ遷移させるには、ランキングの入れ替え部分を内挿してちょっとずつ順位が入れ替わるようにすれば、ぬめぬめ遷移が表現できそうな気がしてきました！
 
 
-# ���Ȃǂ̕\��
+# 軸などの表示
 
 
-y ���ɏ����_���\��Ă���̂��C�ɂȂ�܂��̂ŁA���̕��Y��ɂ��Ă݂܂��傤�B
+y 軸に少数点が表れているのが気になりますので、この辺綺麗にしてみましょう。
 
 
 
 
-�g���̂� `Axes` �I�u�W�F�N�g�� `YTick` �� `YTickLabel` �ł��B���ꂼ��̖_�̃��x���� 
+使うのは `Axes` オブジェクトの `YTick` と `YTickLabel` です。それぞれの棒のラベルは 
 
 
-```matlab
+
+```matlab:Code
 names = ["A","B","C","D","E"];
 ```
 
 
-�Ƃ��܂��B�܂��̓��x����\������ʒu `YTick` ���w�肵�܂��B�����L���O�i�ʒu�j�ɑ������� `XData` �v���p�e�B�l�����̂܂ܓ���Ă݂܂��B 
+
+とします。まずはラベルを表示する位置 `YTick` を指定します。ランキング（位置）に相当する `XData` プロパティ値をそのまま入れてみます。 
 
 
-```matlab
+
+```matlab:Code
 handle_axes = gca;
 ```
-```matlab
+
+
+```matlab:Code
 try
     handle_axes.YTick = handle_bar.XData;
 catch ME
     disp(ME.message)
 end
 ```
+
+
+```text:Output
+値は単精度型または倍精度型のベクトルで、値が増加しなければなりません
 ```
-�l�͒P���x�^�܂��͔{���x�^�̃x�N�g���ŁA�l���������Ȃ���΂Ȃ�܂���
-```
-# YTick �͒P����������Ȃ���
+
+# YTick は単調増加じゃないと
 
 
-�G���[���ł܂����B`YTick` �ɂ�**�P������**�����l��^���Ȃ��ƃG���[���ł܂��B�\�[�g���Ă����܂��傤�B(��������)
+エラーがでました。`YTick` には**単調増加**した値を与えないとエラーがでます。ソートしておきましょう。(小さい順)
 
 
-```matlab
+
+```matlab:Code
 [tmp,idx] = sort(handle_bar.XData,'ascend');
 ```
 
 
-`XData` �̕��בւ��ɉ����� `names` �̏��Ԃ��ς��Ă����K�v������̂ŁA���o�͈����� `idx` ���g���܂��B
+
+`XData` の並べ替えに応じて `names` の順番も変えておく必要があるので、第二出力引数の `idx` も使います。
 
 
-```matlab
+
+```matlab:Code
 handle_axes.YTick = tmp;
 handle_axes.YTickLabel = names(idx);
 ```
+
 
 <--
 **Please drag & drop an image file here**
@@ -279,21 +322,22 @@ If you want to set the image size use the following command
 
 
 
-B �� C ������ւ���Ă��銴�����łĂ܂��ˁI
+B と C が入れ替わっている感じがでてますね！
 
 
-# �c�O�ȓ_�F�F�̖��
+# 残念な点：色の問題
 
 
-`barh` �̎c�O�ȓ_�Ȃ�ł����A1 �� bar �I�u�W�F�N�g�ɑ΂��ĐF��1�F�����w��ł��܂���B
+`barh` の残念な点なんですが、1 つの bar オブジェクトに対して色は1色しか指定できません。
 
 
 
 
-�Ȃ̂ŁA�F�̎�ނ��� `barh` �����s���ĈقȂ� bar �I�u�W�F�N�g�����΂�΂����ł��ˁB
+なので、色の種類だけ `barh` を実行して異なる bar オブジェクトを作ればればいいですね。
 
 
-```matlab
+
+```matlab:Code
 figure
 x = 1:5;
 y1 = [1:4,0]/10;
@@ -304,6 +348,7 @@ handle_bar2 = barh(x,y2);
 hold off
 ```
 
+
 <--
 **Please drag & drop an image file here**
 Filename: **barChartRaceExample_part1_images/figure_5.png**
@@ -311,28 +356,28 @@ If you want to set the image size use the following command
 <img src=" alt="attach:cat" title="attach:cat" width=500px>
 -->
 
-# �܂Ƃ�
+# まとめ
 
 
-�����҂͂����܂ŁI�F�̐����� bar �I�u�W�F�N�g�����Ƃ��낢���ς����ł����A�ނ��낢�낢�뎩�R�ɃJ�X�^�}�C�Y�ł��Ă�����������Ȃ��B
-
-
-
-
-�ł������ȋC�����Ă��܂����B���̓T���v���f�[�^���g���ă����L���O�����ڂ���A�j���[�V�����������Ă݂܂��B
+準備編はここまで！色の数だけ bar オブジェクトを作るといろいろ大変そうですが、むしろいろいろ自由にカスタマイズできていいかもしれない。
 
 
 
 
-��邱�Ƃ͈ȉ���2�_
+できそうな気がしてきました。次はサンプルデータを使ってランキングが推移するアニメーションを書いてみます。
 
 
 
-   -  �����̎��n��f�[�^�̊e���_�ł̒l�̏��ʕt�� 
-   -  ���ʂ�����ւ��J�ڕ�����\�����邽�߂̃f�[�^�̓��} 
+
+やることは以下の2点
 
 
 
-���ꂪ�ł���΁A���Ƃ� bar �I�u�W�F�N�g�ɒl�����Ă��������ł��B
+   -  複数の時系列データの各時点での値の順位付け 
+   -  順位が入れ替わる遷移部分を表示するためのデータの内挿 
+
+
+
+これができれば、あとは bar オブジェクトに値を入れていくだけです。
 
 

@@ -8,7 +8,7 @@ function [str, idxLiteral] = processLiteralOutput(str)
 % \begin{lstlisting}(code)\end{lstlisting}
 %
 % Markdown
-% ```matlab
+% ```matlab:MATLAB Code
 % ÅicodeÅj
 %```
 %% Literal Outputs
@@ -16,7 +16,7 @@ function [str, idxLiteral] = processLiteralOutput(str)
 % \begin{matlaboutput}(output)\end{matlaboutput}
 %
 % Markdown
-% ```
+% ```text:Output
 %  (output)
 % ```
 % Note: Other outputs (matlabsymbolicoutout, matlabtableoutput)
@@ -29,12 +29,12 @@ idx_matlaboutput = startsWith(str,"\begin{matlaboutput}");
 
 idxLiteral = idx_lstlisting | idx_verbatim | idx_matlabcode | idx_matlaboutput;
 
-str(idx_lstlisting) = "```matlab" + extractBetween(str(idx_lstlisting),...
-    "\begin{lstlisting}","\end{lstlisting}") + "```";
-str(idx_verbatim) = "```matlab" + extractBetween(str(idx_verbatim),...
-    "\begin{verbatim}","\end{verbatim}") + "```";
-str(idx_matlabcode) = "```matlab" + extractBetween(str(idx_matlabcode),...
-    "\begin{matlabcode}","\end{matlabcode}") + "```";
-str(idx_matlaboutput) = "```" + extractBetween(str(idx_matlaboutput),...
-    "\begin{matlaboutput}","\end{matlaboutput}") + "```";
+str(idx_lstlisting) = newline + "```matlab:Code(Display)" + extractBetween(str(idx_lstlisting),...
+    "\begin{lstlisting}","\end{lstlisting}") + "```" + newline;
+str(idx_verbatim) = newline + "```matlab:Code(Display)" + extractBetween(str(idx_verbatim),...
+    "\begin{verbatim}","\end{verbatim}") + "```" + newline;
+str(idx_matlabcode) = newline + "```matlab:Code" + extractBetween(str(idx_matlabcode),...
+    "\begin{matlabcode}","\end{matlabcode}") + "```" + newline;
+str(idx_matlaboutput) = newline + "```text:Output" + extractBetween(str(idx_matlaboutput),...
+    "\begin{matlaboutput}","\end{matlaboutput}") + "```" + newline;
 

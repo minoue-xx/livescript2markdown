@@ -97,10 +97,12 @@ str2md = processEquations(str2md, options.format);
 % includegraphics (画像部分)
 str2md = processincludegraphics(str2md, options.format, name, filepath);
 
-% Apply vertical space
+% Apply vertical/horizontal space
 % markdown: two spaces for linebreak
 % latex: \vspace{1em}
+% latex: \hskip1em
 str2md = regexprep(str2md,"\\vspace{1em}","  ");
+str2md = regexprep(str2md,"\\hskip1em","  ");
 str(~idxLiteral) = str2md;
 
 %% Done! Merge them together
