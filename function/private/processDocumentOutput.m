@@ -78,11 +78,6 @@ str2md(idxNonGraphics) = replace(str2md(idxNonGraphics),...
     "\begin{par}"+newline+"\begin{center}"+newline,"> ");
 
 %% 2-6: Delete unnecessary commands (不要コマンドを削除)
-% Delete table of contents: 目次は現時点で削除（TODO）
-% ex: \label{H_D152BAC0}
-str2md = regexprep(str2md,"\\matlabtableofcontents{([^{}]+)}", "");
-str2md = regexprep(str2md,"\\label{[a-zA-Z_0-9]+}","");
-
 % Commands to specify the text position
 str2md = erase(str2md,"\begin{par}");
 str2md = erase(str2md,"\end{par}");

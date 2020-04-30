@@ -43,6 +43,11 @@ fclose(fid);
 % Extract body from latex
 str = extractBetween(str,"\begin{document}","\end{document}");
 
+% Delete table of contents: 目次は現時点で削除（TODO）
+% ex: \label{H_D152BAC0}
+str = regexprep(str,"\\matlabtableofcontents{([^{}]+)}", "");
+str = regexprep(str,"\\label{[a-zA-Z_0-9]+}","");
+
 %% Devide the body into each environment
 % Preprocess 1:
 % Add 'newline' to the end of the following.
