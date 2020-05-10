@@ -1,4 +1,4 @@
-function str = processincludegraphics(str,format,filename,filepath)
+function str = processincludegraphics(str,format,png2jpeg,filename,filepath)
 % Copyright 2020 The MathWorks, Inc.
 
 % Note: There are two cases in the tex
@@ -22,6 +22,16 @@ imagedir = strrep(imagedir, '\', '/');
 for ii=1:length(imageParts)
     fileid = regexp(imageParts(ii),"\\includegraphics\[[^\]]+\]{([^{}]+)}", "tokens");
     imagefilename = ls(fullfile(filepath,imagedir,fileid + "*")); % get the actual filename with extention
+
+    % Compress PNG images as JPEG
+    if png2jpeg
+        [~,imagefilename_wo_ext,ext] = fileparts(imagefilename);
+        if strcmp(ext,'.png')
+            I = imread(fullfile(imagedir,imagefilename));
+            imagefilename = [imagefilename_wo_ext,'.jpg'];
+            imwrite(I,fullfile(imagedir,imagefilename),'Quality',85);
+        end
+    end
     
     switch format
         case 'qiita'

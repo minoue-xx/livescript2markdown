@@ -7,6 +7,7 @@ arguments
     filename (1,1) string
     options.outputfilename char = filename
     options.format char {mustBeMember(options.format,{'qiita','github'})} = 'github'
+    options.png2jpeg logical = false
 end
 
 % Latex filename
@@ -100,7 +101,7 @@ str2md = processDocumentOutput(str2md);
 str2md = processEquations(str2md, options.format);
 
 % includegraphics (画像部分)
-str2md = processincludegraphics(str2md, options.format, name, filepath);
+str2md = processincludegraphics(str2md, options.format, options.png2jpeg, name, filepath);
 
 % Apply vertical/horizontal space
 % markdown: two spaces for linebreak
