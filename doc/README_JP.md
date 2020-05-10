@@ -47,7 +47,7 @@ latex2markdown('README');
 
    -  `'format'`: 用途に合わせて `'github'` (既定) もしくは `'qiita'` を指定してください。 
    -  `'outputfilename'`: 指定しない場合は、live script と同じ名前`.md` のファイルが生成されます。 
-   -  `'png2jpeg'`: `'false'` (既定) もしくは `'true'を指定してください。圧縮のためPNG画像からJPEG画像への変換を有効します。` 
+   -  `'png2jpeg'`: `'false'` (既定) もしくは `'true'` を指定してください。圧縮のためPNG画像からJPEG画像への変換を有効します。 
 
 
 
