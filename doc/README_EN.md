@@ -19,7 +19,7 @@ Note: This README is also auto generated from a live script `README.mlx.`
 ### Step 1: Convert your live script to Latex.
 
 
-![image_0.jpg](README_EN_images/image_0.jpg)
+![image_0.png](README_EN_images/image_0.png)
 
 
 
@@ -182,7 +182,7 @@ Here's a display of the inserted image on live scripts.
 
 
 
-![image_1.jpg](README_EN_images/image_1.jpg)
+![image_1.png](README_EN_images/image_1.png)
 
 
 # Equations

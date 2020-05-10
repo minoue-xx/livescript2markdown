@@ -21,14 +21,14 @@ imagedir = strrep(imagedir, '\', '/');
 % for each images
 for ii=1:length(imageParts)
     fileid = regexp(imageParts(ii),"\\includegraphics\[[^\]]+\]{([^{}]+)}", "tokens");
-    imagefilename = ls(fullfile(filepath,imagedir,fileid + "*")); % get the actual filename with extention
+    imagefilename = ls(fullfile(filepath,imagedir,fileid + ".*")); % get the actual filename with extention
 
     % Compress PNG images as JPEG
     if png2jpeg
         [~,imagefilename_wo_ext,ext] = fileparts(imagefilename);
         if strcmp(ext,'.png')
             I = imread(fullfile(imagedir,imagefilename));
-            imagefilename = [imagefilename_wo_ext,'.jpg'];
+            imagefilename = [imagefilename_wo_ext,'_png.jpg'];
             imwrite(I,fullfile(imagedir,imagefilename),'Quality',85);
         end
     end

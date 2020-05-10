@@ -15,7 +15,7 @@ Copyright 2020 The MathWorks, Inc.
 ### Step 1: Latex に変換
 
 
-![image_0.jpg](README_JP_images/image_0.jpg)
+![image_0.png](README_JP_images/image_0.png)
 
 
 
@@ -168,7 +168,7 @@ Live script に挿入された画像は以下の通り。
 
 
 
-![image_1.jpg](README_JP_images/image_1.jpg)
+![image_1.png](README_JP_images/image_1.png)
 
 
 # 数式
