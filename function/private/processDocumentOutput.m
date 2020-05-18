@@ -169,13 +169,11 @@ tableLatex = extractBetween(str2md(idxTblOutput),...
 
 tableMD = strings(sum(idxTblOutput),1);
 for ii=1:sum(idxTblOutput)
-%     tablecontents = split(tableLatex(ii),newline);
     tablecontents = split(tableLatex(ii),"\hline");
     formatLatex = tablecontents(1); % {|l|c|r|}
     headerLatex = tablecontents(2); % \mlcell{TD} & \mlcell{TD} & \mlcell{TD} \\ \hline
     bodyLatex = tablecontents(3:end); % and the rest.
     
-%     format = regexp(formatLatex,"\{([^{}]+)}\\hline",'tokens');
     format = regexp(formatLatex,"\{([^{}]+)}",'tokens');
     format = format{:};
     format = replace(format, "c",":--:");
@@ -186,7 +184,6 @@ for ii=1:sum(idxTblOutput)
     % It only happens as a variable name in MATLAB
     % so adding special case for processing headerLatex
     multicol = regexp(headerLatex,"\\multicolumn{(\d)+}",'tokens');
-%     tmp = regexp(headerLatex,"\\mlcell{(.*?)}",'tokens');
     tmp = regexp(headerLatex,"\\mlcell{(.|\s)*?} (?:&|\\\\)",'tokens');
     if isempty(multicol)
         header = "|" + join([tmp{:}],"|") + "|";
@@ -197,13 +194,13 @@ for ii=1:sum(idxTblOutput)
     
     body = string;
     for jj=1:length(bodyLatex)
-%         tmp = regexp(bodyLatex(jj),"\\mlcell{(.*?)}",'tokens');
-%         tmp = regexp(bodyLatex(jj),"\\mlcell{(.*?)}",'tokens');
         tmp = regexp(bodyLatex(jj),"\\mlcell{(.|\s)*?} (?:&|\\\\)",'tokens');
         if isempty(tmp)
             break;
         end
         tmp = cellfun(@(str1) cutStringLength(str1, tableMaxWidth), tmp, 'UniformOutput', false);
+        
+        % Adding escape to text that affects markdown table (\n and |)
         tmp = cellfun(@(str1) replace(str1,"|","\|"), tmp, 'UniformOutput', false);
         tmp = cellfun(@(str1) replace(str1,newline,"<br>"), tmp, 'UniformOutput', false);
         body = body + "|" + join([tmp{:}],"|") + "|" + newline;
