@@ -1,5 +1,6 @@
-function str2md = processDocumentOutput(str2md)
-
+function str2md = processDocumentOutput(str2md,tableMaxWidth)
+% Copyright 2020 The MathWorks, Inc.
+    
 %% 2-1: Fix latex conventions for non-literal parts
 % ^ (live script) -> \textasciicircum{} (latex)
 str2md = replace(str2md,"\textasciicircum{}","^");
@@ -168,12 +169,14 @@ tableLatex = extractBetween(str2md(idxTblOutput),...
 
 tableMD = strings(sum(idxTblOutput),1);
 for ii=1:sum(idxTblOutput)
-    tablecontents = split(tableLatex(ii),newline);
-    formatLatex = tablecontents(1);
-    headerLatex = tablecontents(2);
-    bodyLatex = tablecontents(3:end);
+%     tablecontents = split(tableLatex(ii),newline);
+    tablecontents = split(tableLatex(ii),"\hline");
+    formatLatex = tablecontents(1); % {|l|c|r|}
+    headerLatex = tablecontents(2); % \mlcell{TD} & \mlcell{TD} & \mlcell{TD} \\ \hline
+    bodyLatex = tablecontents(3:end); % and the rest.
     
-    format = regexp(formatLatex,"\{([^{}]+)}\\hline",'tokens');
+%     format = regexp(formatLatex,"\{([^{}]+)}\\hline",'tokens');
+    format = regexp(formatLatex,"\{([^{}]+)}",'tokens');
     format = format{:};
     format = replace(format, "c",":--:");
     format = replace(format, "l",":--");
@@ -183,7 +186,8 @@ for ii=1:sum(idxTblOutput)
     % It only happens as a variable name in MATLAB
     % so adding special case for processing headerLatex
     multicol = regexp(headerLatex,"\\multicolumn{(\d)+}",'tokens');
-    tmp = regexp(headerLatex,"\\mlcell{(.*?)}",'tokens');
+%     tmp = regexp(headerLatex,"\\mlcell{(.*?)}",'tokens');
+    tmp = regexp(headerLatex,"\\mlcell{(.|\s)*?} (?:&|\\\\)",'tokens');
     if isempty(multicol)
         header = "|" + join([tmp{:}],"|") + "|";
     else
@@ -193,11 +197,15 @@ for ii=1:sum(idxTblOutput)
     
     body = string;
     for jj=1:length(bodyLatex)
-        tmp = regexp(bodyLatex(jj),"\\mlcell{(.*?)}",'tokens');
-        
+%         tmp = regexp(bodyLatex(jj),"\\mlcell{(.*?)}",'tokens');
+%         tmp = regexp(bodyLatex(jj),"\\mlcell{(.*?)}",'tokens');
+        tmp = regexp(bodyLatex(jj),"\\mlcell{(.|\s)*?} (?:&|\\\\)",'tokens');
         if isempty(tmp)
             break;
         end
+        tmp = cellfun(@(str1) cutStringLength(str1, tableMaxWidth), tmp, 'UniformOutput', false);
+        tmp = cellfun(@(str1) replace(str1,"|","\|"), tmp, 'UniformOutput', false);
+        tmp = cellfun(@(str1) replace(str1,newline,"<br>"), tmp, 'UniformOutput', false);
         body = body + "|" + join([tmp{:}],"|") + "|" + newline;
     end
     
@@ -208,3 +216,14 @@ str2md(idxTblOutput) = tableMD;
 %% finish up
 str2md = replace(str2md,"\{","{");
 str2md = replace(str2md,"\}","}");
+
+end
+
+function str2 = cutStringLength(str1, N)
+    
+    str2 = str1;
+    if strlength(str1) > N
+       tmp = char(str1);
+       str2 = string(tmp(1:N)) + "...";
+    end
+end

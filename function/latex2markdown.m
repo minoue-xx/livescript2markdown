@@ -8,6 +8,7 @@ arguments
     options.outputfilename char = filename
     options.format char {mustBeMember(options.format,{'qiita','github'})} = 'github'
     options.png2jpeg logical = false
+    options.tableMaxWidth (1,1) double = 20
 end
 
 % Latex filename
@@ -95,7 +96,7 @@ str = mergeSameEnvironments(str,"matlabsymbolicoutput");
 
 % 2: Process that other parts
 str2md = str(~idxLiteral);
-str2md = processDocumentOutput(str2md);
+str2md = processDocumentOutput(str2md,options.tableMaxWidth);
 
 % Equations (数式部分)
 str2md = processEquations(str2md, options.format);
