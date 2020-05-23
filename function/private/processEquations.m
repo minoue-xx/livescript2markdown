@@ -5,7 +5,7 @@ function str2md = processEquations(str2md, format)
 % see. http://idken.net/posts/2017-02-28-math_github/ (Japanese)
 %
 % For Qiita users: (Qiita platform renders equations via mathML)
-% Leave inline equation as it is (•¶’†‚Ì”®‚Í latex ‚Å $equation$ ‚È‚Ì‚Å‚»‚Ì‚Ü‚Ü)
+% Leave inline equation as it is (æ–‡ä¸­ã®æ•°å¼ã¯ latex ã§ $equation$ ãªã®ã§ãã®ã¾ã¾)
 % and $$equation$$ will be changed to
 % ```math
 % equation

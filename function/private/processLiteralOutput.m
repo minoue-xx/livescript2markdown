@@ -9,7 +9,7 @@ function [str, idxLiteral] = processLiteralOutput(str)
 %
 % Markdown
 % ```matlab:MATLAB Code
-% ÅicodeÅj
+% ÔºàcodeÔºâ
 %```
 %% Literal Outputs
 % Latex: 

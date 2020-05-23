@@ -27,7 +27,7 @@ str2md = replace(str2md,"\%","%");
 str2md = replace(str2md,"\{", "BackslashCurlyBlacketOpen");
 str2md = replace(str2md,"\}", "BackslashCurlyBlacketClose");
 
-%% 2-2: Text decoration (•¶š‘•ü•”•ª)
+%% 2-2: Text decoration (æ–‡å­—è£…é£¾éƒ¨åˆ†)
 % \textbf{bold}
 % \textit{italic}
 % \underline{underline}
@@ -37,7 +37,7 @@ str2md = replace(str2md,"\}", "BackslashCurlyBlacketClose");
 % Need to keep this execution sequence
 str2md = regexprep(str2md,"\\textbf{([^{}]+)}","**$1**");
 str2md = regexprep(str2md,"\\textit{([^{}]+)}","*$1*");
-str2md = regexprep(str2md,"\\underline{([^{}]+)}","$1"); % Ignore underline (‰ºü‚Í–³‹j
+str2md = regexprep(str2md,"\\underline{([^{}]+)}","$1"); % Ignore underline (ä¸‹ç·šã¯ç„¡è¦–ï¼‰
 str2md = regexprep(str2md,"\\texttt{(\*{0,3})([^*{}]+)(\*{0,3})}","$1`$2`$3");
 
 % Note on the processing \texttt
@@ -48,14 +48,14 @@ str2md = regexprep(str2md,"\\texttt{(\*{0,3})([^*{}]+)(\*{0,3})}","$1`$2`$3");
 % gives
 % `**EquispaceBold**`
 % which does not work. ` ` needs to be most inside.
-% `` ‚ªÅ‚àŠO‘¤‚É‚­‚é‚ªˆê”Ô“à‘¤‚É‚ ‚é•K—v‚ª‚ ‚éB
+% `` ãŒæœ€ã‚‚å¤–å´ã«ãã‚‹ãŒä¸€ç•ªå†…å´ã«ã‚ã‚‹å¿…è¦ãŒã‚ã‚‹ã€‚
 
-%% 2-3: Hyperlinks (ƒnƒCƒp[ƒŠƒ“ƒN)
+%% 2-3: Hyperlinks (ãƒã‚¤ãƒ‘ãƒ¼ãƒªãƒ³ã‚¯)
 % Markdown: [string](http://xxx.com)
 % latex: \href{http://xxx.com}{string}
 str2md = regexprep(str2md,"\\href{([^{}]+)}{([^{}]+)}","[$2]($1)");
 
-%% 2-4: Titile and headings (Œ©o‚µ•”•ª)
+%% 2-4: Titile and headings (è¦‹å‡ºã—éƒ¨åˆ†)
 str2md = regexprep(str2md,"\\matlabtitle{([^{}]+)}","# $1");
 str2md = regexprep(str2md,"\\matlabheading{([^{}]+)}","# $1");
 str2md = regexprep(str2md,"\\matlabheadingtwo{([^{}]+)}","## $1");
@@ -65,7 +65,7 @@ str2md = regexprep(str2md,"\\matlabheadingthree{([^{}]+)}","### $1");
 str2md = replace(str2md,"BackslashCurlyBlacketOpen","\{");
 str2md = replace(str2md, "BackslashCurlyBlacketClose","\}");
 
-%% 2-5: Quotation (ˆø—pƒpƒ‰ƒOƒ‰ƒt)
+%% 2-5: Quotation (å¼•ç”¨ãƒ‘ãƒ©ã‚°ãƒ©ãƒ•)
 % Markdown: >
 % Latex:
 % \begin{par}
@@ -78,7 +78,7 @@ idxNonGraphics = ~contains(str2md,"\includegraphics");
 str2md(idxNonGraphics) = replace(str2md(idxNonGraphics),...
     "\begin{par}"+newline+"\begin{center}"+newline,"> ");
 
-%% 2-6: Delete unnecessary commands (•s—vƒRƒ}ƒ“ƒh‚ğíœ)
+%% 2-6: Delete unnecessary commands (ä¸è¦ã‚³ãƒãƒ³ãƒ‰ã‚’å‰Šé™¤)
 % Commands to specify the text position
 str2md = erase(str2md,"\begin{par}");
 str2md = erase(str2md,"\end{par}");
@@ -87,14 +87,14 @@ str2md = erase(str2md,"\end{flushleft}");
 str2md = erase(str2md,"\begin{center}");
 str2md = erase(str2md,"\end{center}");
 
-%% 2-7: Unordered list (ƒŠƒXƒg)
+%% 2-7: Unordered list (ãƒªã‚¹ãƒˆ)
 % markdown: add - to each item
 % latex:
 %      \begin{itemize}
 %      \setlength{\itemsep}{-1ex}
-%         \item{\begin{flushleft} ƒŠƒXƒg‚P \end{flushleft}}
-%         \item{\begin{flushleft} ƒŠƒXƒg‚Q \end{flushleft}}
-%         \item{\begin{flushleft} ƒŠƒXƒg‚R \end{flushleft}}
+%         \item{\begin{flushleft} ãƒªã‚¹ãƒˆï¼‘ \end{flushleft}}
+%         \item{\begin{flushleft} ãƒªã‚¹ãƒˆï¼’ \end{flushleft}}
+%         \item{\begin{flushleft} ãƒªã‚¹ãƒˆï¼“ \end{flushleft}}
 %      \end{itemize}
 str2md = erase(str2md,"\setlength{\itemsep}{-1ex}"+newline);
 itemizeIdx = contains(str2md,["\begin{itemize}","\end{itemize}"]);
@@ -103,14 +103,14 @@ partsMarkdown = regexprep(itemsParts,"\\item{([^{}]+)}","- $1");
 partsMarkdown = erase(partsMarkdown,["\begin{itemize}","\end{itemize}"]);
 str2md(itemizeIdx) = partsMarkdown;
 
-%% 2-8: Ordered list (”•t‚«ƒŠƒXƒg)
+%% 2-8: Ordered list (æ•°ä»˜ããƒªã‚¹ãƒˆ)
 % markdown: 1. itemname
 % latex:
 %      \begin{enumerate}
 %      \setlength{\itemsep}{-1ex}
-%         \item{\begin{flushleft} ƒŠƒXƒg‚P \end{flushleft}}
-%         \item{\begin{flushleft} ƒŠƒXƒg‚Q \end{flushleft}}
-%         \item{\begin{flushleft} ƒŠƒXƒg‚R \end{flushleft}}
+%         \item{\begin{flushleft} ãƒªã‚¹ãƒˆï¼‘ \end{flushleft}}
+%         \item{\begin{flushleft} ãƒªã‚¹ãƒˆï¼’ \end{flushleft}}
+%         \item{\begin{flushleft} ãƒªã‚¹ãƒˆï¼“ \end{flushleft}}
 %      \end{enumerate}
 str2md = erase(str2md,"\setlength{\itemsep}{-1ex}"+newline);
 itemizeIdx = contains(str2md,["\begin{enumerate}","\end{enumerate}"]);
@@ -119,7 +119,7 @@ partsMarkdown = regexprep(itemsParts,"\\item{([^{}]+)}","1. $1");% Any numder wo
 partsMarkdown = erase(partsMarkdown,["\begin{enumerate}","\end{enumerate}"]);
 str2md(itemizeIdx) = partsMarkdown;
 
-%% 2-9: Symbolic output (ƒVƒ“ƒ{ƒŠƒbƒNo—Í)
+%% 2-9: Symbolic output (ã‚·ãƒ³ãƒœãƒªãƒƒã‚¯å‡ºåŠ›)
 % markdown: inline equation
 % latex:
 % \begin{matlabsymbolicoutput}
@@ -147,7 +147,7 @@ partsMarkdown = replace(tmp,"$"+newline+"\end{matlabsymbolicoutput}","$$");
 str2md(symoutIdx) = partsMarkdown;
 % NOTE: This part will be processed by processEquations.m
 
-%% 2-10: table output (table Œ^ƒf[ƒ^‚Ìo—Í)
+%% 2-10: table output (table å‹ãƒ‡ãƒ¼ã‚¿ã®å‡ºåŠ›)
 % markdown:
 % | TH left | TH center | TH right |
 % | :--- | :---: | ---: |
