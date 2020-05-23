@@ -10,6 +10,15 @@ function str2md = processEquations(str2md, format)
 % ```math
 % equation
 % ```
+%
+% For Wordpress users: (Assume Wordpress platform renders equations via WP QuickLaTeX)
+% Add [latex] short code to the first line. 
+% Leave inline equation as it is (文中の数式は latex で $equation$ なのでそのまま)
+% and $$equation$$ will be changed to
+% [latex]
+% equation
+% [/latex]
+% See https://ja.wordpress.org/plugins/wp-quicklatex/
 
 switch format
     case 'qiita'
@@ -38,4 +47,11 @@ switch format
                 + eqncode + """/>";
             str2md = replace(str2md, "$"+parts(ii)+"$", partsMD);
         end
+case 'wpquicklatex'
+        % Add [latexpage] short code into the firstline to enable Quick LaTeX processing. 
+        str2md(1,1) = "[latexpage]" + newline + str2md(1,1);
+        % Convert the line break character from  \\ to \\\\ to take into account the de-escaping by Gutenberg editor.
+        str2md = regexprep(str2md,"\\\\", "\\\\\\\\");
+        % convert display block from  $$ ... $$ to \[ ... \]. 
+        str2md = regexprep(str2md,"[^`]?\$\$([^$]+)\$\$[^`]?",newline+"\\\\[" + newline + "$1" + newline + "\\\\]");
 end
