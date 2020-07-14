@@ -26,3 +26,5 @@
 
 # Simulink cache files
 **/*.slxc
+
+Live Script to Markdown Converter.mltbx
