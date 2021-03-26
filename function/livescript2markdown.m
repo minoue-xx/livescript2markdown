@@ -1,5 +1,7 @@
 function mdFileAbsPath = livescript2markdown(mlxFilePath, mdFilePath, opts)
 %% Automatically convert Live Script mlx file to markdown file
+%  Copyright 2021 Pavel Roslovets
+%  https://roslovets.github.io
 arguments
     mlxFilePath (1,:) char {mustBeFile}
     mdFilePath (1,:) char = ''
