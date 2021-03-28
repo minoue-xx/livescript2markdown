@@ -162,3 +162,6 @@ There's not corresponding function, but here centered paragraph is treated as qu
 # Feedback
 
 Hope it accelerates your MATLAB life. Any comment and suggestions are always appreciated.
+
+***
+*Generated from GettingStarted.mlx with [Live Script to Markdown Converter](https://github.com/roslovets/livescript2markdown)*

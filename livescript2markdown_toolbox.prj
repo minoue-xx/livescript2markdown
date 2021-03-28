@@ -26,7 +26,7 @@ installweb.m</param.exclude.filters>
     <param.apps />
     <param.registered.apps />
     <param.docs />
-    <param.getting.started.guide />
+    <param.getting.started.guide>${PROJECT_ROOT}\doc\GettingStarted.mlx</param.getting.started.guide>
     <param.matlabpath.excludes>
       <item>/dev</item>
     </param.matlabpath.excludes>
@@ -65,7 +65,6 @@ installweb.m</param.exclude.filters>
       <param.apps />
       <param.registered.apps />
       <param.docs />
-      <param.getting.started.guide />
       <param.javaclasspath.excludes />
       <param.exported.on.package />
       <param.required.addons />
