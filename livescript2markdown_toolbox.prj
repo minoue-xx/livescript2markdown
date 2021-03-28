@@ -1,9 +1,9 @@
 <deployment-project plugin="plugin.toolbox" plugin-version="1.0">
-  <configuration file="E:\MATLAB\livescript2markdown\livescript2markdown_toolbox.prj" location="E:\MATLAB\livescript2markdown" name="livescript2markdown_toolbox" target="target.toolbox" target-name="Package Toolbox">
+  <configuration file="D:\MATLAB\livescript2markdown\livescript2markdown_toolbox.prj" location="D:\MATLAB\livescript2markdown" name="livescript2markdown_toolbox" target="target.toolbox" target-name="Package Toolbox">
     <param.appname>Live Script to Markdown Converter</param.appname>
     <param.authnamewatermark>Pavel Roslovets</param.authnamewatermark>
-    <param.email>roslovets@exponenta.ru</param.email>
-    <param.company>ETMC Exponenta</param.company>
+    <param.email />
+    <param.company />
     <param.summary>Easily convert live scripts to markdown files</param.summary>
     <param.description />
     <param.screenshot />
@@ -14,7 +14,12 @@
     <param.products.version />
     <param.platforms />
     <param.guid>c5ce6999-1e66-4758-81ee-567db8689a9b</param.guid>
-    <param.exclude.filters />
+    <param.exclude.filters>*.asv
+.git
+.gitignore
+resources
+dev
+installweb.m</param.exclude.filters>
     <param.exclude.pcodedmfiles>true</param.exclude.pcodedmfiles>
     <param.examples />
     <param.demosxml />
@@ -22,13 +27,15 @@
     <param.registered.apps />
     <param.docs />
     <param.getting.started.guide />
-    <param.matlabpath.excludes />
+    <param.matlabpath.excludes>
+      <item>/dev</item>
+    </param.matlabpath.excludes>
     <param.javaclasspath.excludes />
     <param.exported.on.package>false</param.exported.on.package>
     <param.required.addons />
     <param.matlab.project.id />
     <param.matlab.project.name />
-    <param.release.start>R2019b</param.release.start>
+    <param.release.start>R2020b</param.release.start>
     <param.release.end>latest</param.release.end>
     <param.release.current.only>false</param.release.current.only>
     <param.compatiblity.windows>true</param.compatiblity.windows>
@@ -42,7 +49,6 @@
     <param.additional.sw.mac.url />
     <param.additional.sw.linux.url />
     <unset>
-      <param.authnamewatermark />
       <param.email />
       <param.company />
       <param.description />
@@ -53,7 +59,6 @@
       <param.products.id />
       <param.products.version />
       <param.platforms />
-      <param.exclude.filters />
       <param.exclude.pcodedmfiles />
       <param.examples />
       <param.demosxml />
@@ -61,7 +66,6 @@
       <param.registered.apps />
       <param.docs />
       <param.getting.started.guide />
-      <param.matlabpath.excludes />
       <param.javaclasspath.excludes />
       <param.exported.on.package />
       <param.required.addons />
@@ -83,24 +87,23 @@
       <file>${PROJECT_ROOT}</file>
     </fileset.rootdir>
     <fileset.rootfiles>
-      <file>${PROJECT_ROOT}\.git</file>
-      <file>${PROJECT_ROOT}\.gitignore</file>
       <file>${PROJECT_ROOT}\doc</file>
       <file>${PROJECT_ROOT}\examples</file>
       <file>${PROJECT_ROOT}\function</file>
       <file>${PROJECT_ROOT}\license.txt</file>
       <file>${PROJECT_ROOT}\README.md</file>
+      <file>${PROJECT_ROOT}\README_images</file>
       <file>${PROJECT_ROOT}\SECURITY.md</file>
     </fileset.rootfiles>
     <fileset.depfun.included />
     <fileset.depfun.excluded />
     <fileset.package />
     <build-deliverables>
-      <file location="${PROJECT_ROOT}" name="Live Script to Markdown Converter.mltbx" optional="false">E:\MATLAB\livescript2markdown\Live Script to Markdown Converter.mltbx</file>
+      <file location="${PROJECT_ROOT}" name="Live Script to Markdown Converter.mltbx" optional="false">D:\MATLAB\livescript2markdown\Live Script to Markdown Converter.mltbx</file>
     </build-deliverables>
     <workflow />
     <matlab>
-      <root>E:\Program Files\MATLAB\R2020a</root>
+      <root>C:\Program Files\MATLAB\R2021a</root>
       <toolboxes>
         <toolbox name="matlabcoder" />
         <toolbox name="embeddedcoder" />
