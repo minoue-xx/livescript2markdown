@@ -1,3 +1,6 @@
+# ⚠ DEPRECATED ⚠
+**Use [Live Script to Markdown Converter Toolbox](https://github.com/roslovets/Live-Script-to-Markdown-Converter) instead**
+
 # Live Script to Markdown Converter Toolbox
 # Introduction
 
