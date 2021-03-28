@@ -10,7 +10,7 @@ arguments
     opts.TableMaxWidth (1,1) double = 20
     opts.FixLinks logical = true % Fix MATLAB special links
     opts.NormalizeLines logical = true % Remove extra empty lines
-    opts.AddCredentials logical = false % Add toolbox credentials
+    opts.AddMention logical = false % Add toolbox mention
 end
 
 if isempty(mdFilePath)
@@ -97,7 +97,7 @@ if opts.NormalizeLines
     txt = join(ls, newline);
     txt = strtrim(txt);
 end
-if opts.AddCredentials
+if opts.AddMention
     [~, mlxFileName, mlxFileExt] = fileparts(mlxFilePath);
     txt = string(txt) + newline + newline +...
         sprintf("***\n*Generated from %s with [Live Script to Markdown Converter](%s)*",...

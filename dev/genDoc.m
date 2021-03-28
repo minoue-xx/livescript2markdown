@@ -3,4 +3,4 @@ function genDoc()
 proj = currentProject();
 srcdoc = fullfile(proj.RootFolder, 'doc/GettingStarted.mlx');
 resdoc = fullfile(proj.RootFolder, 'README.md');
-livescript2markdown(srcdoc, resdoc, 'AddCredentials', true);
+livescript2markdown(srcdoc, resdoc, 'AddMention', true);
