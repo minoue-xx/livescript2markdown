@@ -84,6 +84,8 @@ str2md = erase(str2md,"\begin{par}");
 str2md = erase(str2md,"\end{par}");
 str2md = erase(str2md,"\begin{flushleft}");
 str2md = erase(str2md,"\end{flushleft}");
+str2md = erase(str2md,"\begin{flushright}");
+str2md = erase(str2md,"\end{flushright}");
 str2md = erase(str2md,"\begin{center}");
 str2md = erase(str2md,"\end{center}");
 
