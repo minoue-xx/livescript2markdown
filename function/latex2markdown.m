@@ -6,7 +6,7 @@ function mdfile = latex2markdown(filename,options)
 arguments
     filename (1,1) string
     options.outputfilename char = filename
-    options.format char {mustBeMember(options.format,{'qiita','github'})} = 'github'
+    options.format char {mustBeMember(options.format,{'qiita','github','wpquicklatex'})} = 'github'
     options.png2jpeg logical = false
     options.tableMaxWidth (1,1) double = 20
 end

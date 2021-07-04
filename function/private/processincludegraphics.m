@@ -51,6 +51,11 @@ for ii=1:length(imageParts)
             %  ![string]('path to a image')
             imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+fileid{:}+"}",...
                 "!["+imagefilename+"]("+imagedir+imagefilename+")");
+        case 'wpquicklatex'
+            % Wordpress に移行する際は、画像ファイルを該当箇所に drag & drop する必要
+            %  ![string]('path to a image')
+            imageParts(ii) = regexprep(imageParts(ii),"\\includegraphics\[[^\]]+\]{"+fileid{:}+"}",...
+                "!["+imagefilename+"]("+imagedir+imagefilename+")");
     end
 end
 
