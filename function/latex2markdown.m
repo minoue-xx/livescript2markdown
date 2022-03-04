@@ -1,5 +1,5 @@
 function mdfile = latex2markdown(filename,options)
-%  Copyright 2020-2021 The MathWorks, Inc.
+%  Copyright 2020-2022 The MathWorks, Inc.
 
 % What is arguments?
 % see: https://jp.mathworks.com/help/matlab/matlab_prog/argument-validation-functions.html
