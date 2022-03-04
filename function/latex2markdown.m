@@ -1,5 +1,5 @@
 function mdfile = latex2markdown(filename,options)
-%  Copyright 2020 The MathWorks, Inc.
+%  Copyright 2020-2022 The MathWorks, Inc.
 
 % What is arguments?
 % see: https://jp.mathworks.com/help/matlab/matlab_prog/argument-validation-functions.html
@@ -9,6 +9,7 @@ arguments
     options.format char {mustBeMember(options.format,{'qiita','github'})} = 'github'
     options.png2jpeg logical = false
     options.tableMaxWidth (1,1) double = 20
+    options.ToC logical = false
 end
 
 % Latex filename
@@ -49,6 +50,50 @@ str = extractBetween(str,"\begin{document}","\end{document}");
 % ex: \label{H_D152BAC0}
 str = regexprep(str,"\\matlabtableofcontents{([^{}]+)}", "");
 str = regexprep(str,"\\label{[a-zA-Z_0-9]+}","");
+
+
+%% ToC
+% \matlabtitle{タイトル}
+% \matlabheading{セクション１}
+% \matlabheadingtwo{サブセクション１}
+% \matlabheadingthree{サブサブセクション}
+% 
+% - [セクション](#セクション)
+%   - [サブセクション](#サブセクション)
+%      - [サブサブセクション](#サブサブセクション)
+toc_str = regexp(str,"\\matlabheading(|two|three){([^{}]+)}","match");
+toc_id = regexp(str,"\\matlabheading(?:|two|three){([^{}]+)}","tokens");
+
+% check if any duplicate id for toc
+toc_id = string(toc_id);
+if length(toc_id) ~= length(unique(toc_id))
+    warning("latex2markdown:ToCdupID","Duplication in section title is found. Some hyperlinks in ToC may not work properly.")
+end
+
+% generate ToC with hyperlink for markdown
+toc_md = regexprep(toc_str,"\\matlabheading{([^{}]+)}","- [$1](#$1)");
+toc_md = regexprep(toc_md,"\\matlabheadingtwo{([^{}]+)}","  - [$1](#$1)");
+toc_md = regexprep(toc_md,"\\matlabheadingthree{([^{}]+)}","    - [$1](#$1)");
+
+% IDs need to be all lowercase
+toc_md = lower(toc_md);
+
+% spcaes in IDs need to be replaced with - (the code here is not clean...)
+ids = regexp(toc_md,"\(#.*\)","match"); % 
+for ii=1:length(ids) % for each IDs
+    tmp = ids{ii};
+    for jj=1:length(tmp) % 
+        % replace ID string with a string whose space is replased by -.
+        toc_md = replace(toc_md,tmp(jj),replace(tmp(jj)," ","-"));
+    end
+end
+% Note: the code below replaces id itself with -.
+% toc_md = regexprep(toc_md,"\(#\S*(\s+)\S*\)","-");
+% it would be nice if we can perform any operation on the token directly,
+% eg. toc_md = regexprep(toc_str,"\\matlabheading{([^{}]+)}","- [$1](#fun($1))");
+
+% join the strings
+toc_md = join(toc_md,newline);
 
 %% Devide the body into each environment
 % Preprocess 1:
@@ -114,6 +159,11 @@ str(~idxLiteral) = str2md;
 
 %% Done! Merge them together
 strmarkdown = join(str,newline);
+
+% Add toc at the top 
+if options.ToC
+    strmarkdown = [toc_md; newline; strmarkdown];
+end
 
 %% File outputファイル出力
 mdfile = options.outputfilename + ".md";
