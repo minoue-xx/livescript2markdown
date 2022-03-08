@@ -58,6 +58,7 @@ str = regexprep(str,"\\label{[a-zA-Z_0-9]+}","");
 % \matlabheadingtwo{サブセクション１}
 % \matlabheadingthree{サブサブセクション}
 % 
+% # Table of contents
 % - [セクション](#セクション)
 %   - [サブセクション](#サブセクション)
 %      - [サブサブセクション](#サブサブセクション)
