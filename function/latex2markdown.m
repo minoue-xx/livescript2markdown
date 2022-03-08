@@ -93,6 +93,7 @@ end
 % it would be nice if we can perform any operation on the token directly,
 % eg. toc_md = regexprep(toc_str,"\\matlabheading{([^{}]+)}","- [$1](#fun($1))");
 
+toc_md = ["# Table of contents", toc_md]; % add tile
 % join the strings
 toc_md = join(toc_md,newline);
 
