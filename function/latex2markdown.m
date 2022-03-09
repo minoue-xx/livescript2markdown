@@ -62,8 +62,17 @@ str = regexprep(str,"\\label{[a-zA-Z_0-9]+}","");
 % - [セクション](#セクション)
 %   - [サブセクション](#サブセクション)
 %      - [サブサブセクション](#サブサブセクション)
-toc_str = regexp(str,"\\matlabheading(|two|three){([^{}]+)}","match");
-toc_id = regexp(str,"\\matlabheading(?:|two|three){([^{}]+)}","tokens");
+
+% Delete strings for literal display from generating ToC
+% namely..
+% \begin{matlabcode}(code)\end{matlabcode}
+% \begin{verbatim}(code)\end{verbatim}
+% \begin{matlaboutput}(code)\end{matlaboutput}
+tmp = regexprep(str,"\\begin{verbatim}.*?\\end{verbatim}","");
+tmp = regexprep(tmp,"\\begin{matlabcode}.*?\\end{matlabcode}","");
+tmp = regexprep(tmp,"\\begin{matlaboutput}.*?\\end{matlaboutput}","");
+toc_str = regexp(tmp,"\\matlabheading(|two|three){([^{}]+)}","match");
+toc_id = regexp(tmp,"\\matlabheading(?:|two|three){([^{}]+)}","tokens");
 
 % check if any duplicate id for toc
 toc_id = string(toc_id);
@@ -77,16 +86,14 @@ toc_md = regexprep(toc_md,"\\matlabheadingtwo{([^{}]+)}","  - [$1](#$1)");
 toc_md = regexprep(toc_md,"\\matlabheadingthree{([^{}]+)}","    - [$1](#$1)");
 
 % IDs need to be all lowercase
-toc_md = lower(toc_md);
-
 % spcaes in IDs need to be replaced with - (the code here is not clean...)
 ids = regexp(toc_md,"\(#.*\)","match"); % 
 for ii=1:length(ids) % for each IDs
-    tmp = ids{ii};
-    for jj=1:length(tmp) % 
-        % replace ID string with a string whose space is replased by -.
-        toc_md = replace(toc_md,tmp(jj),replace(tmp(jj)," ","-"));
-    end
+    tmp1 = ids{ii}; 
+    tmp2 = replace(tmp1," ","-"); % space is replased by -.
+    tmp2 = lower(tmp2); % lowercase
+    % replace ID string with a new string
+    toc_md = replace(toc_md,tmp1,tmp2);
 end
 % Note: the code below replaces id itself with -.
 % toc_md = regexprep(toc_md,"\(#\S*(\s+)\S*\)","-");
