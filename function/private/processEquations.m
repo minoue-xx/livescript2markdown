@@ -1,8 +1,19 @@
 function str2md = processEquations(str2md, format)
 % Copyright 2020 The MathWorks, Inc.
 % 
-% For Github users: Use https://latex.codecogs.com
+% For Github users: 
+% format = 'github'
+% Use https://latex.codecogs.com
 % see. http://idken.net/posts/2017-02-28-math_github/ (Japanese)
+%
+% format = 'github_math'
+% Use GitHub capability to display equations (first version became
+% available in May 2022)
+% Leave inline equation as it is (文中の数式は latex で $equation$ なのでそのまま)
+% and $$equation$$ will be changed to
+% $$
+% equation
+% $$
 %
 % For Qiita users: (Qiita platform renders equations via mathML)
 % Leave inline equation as it is (文中の数式は latex で $equation$ なのでそのまま)
@@ -14,6 +25,8 @@ function str2md = processEquations(str2md, format)
 switch format
     case 'qiita'
         str2md = regexprep(str2md,"[^`]?\$\$([^$]+)\$\$[^`]?",newline+"```math" + newline + "$1" + newline + "```");
+    case 'github_math'
+        str2md = regexprep(str2md,"[^`]?\$\$([^$]+)\$\$[^`]?",newline+"$$" + newline + "$1" + newline + "$$");
     case 'github'
         tt = regexp(str2md,"[^`]?\$\$([^$]+)\$\$[^`]?", 'tokens');
         idx = cellfun(@iscell,tt); 
