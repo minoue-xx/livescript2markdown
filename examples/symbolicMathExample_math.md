@@ -35,9 +35,7 @@ fplot(df)
 hold off
 ```
 
-
-\includegraphics[width=\maxwidth{56.196688409433015em}]{figure_0.png}
-
+![figure_0.png](symbolicMathExample_images/figure_0.png)
 
 ```matlab:Code
 a = [cos(theta), -sin(theta),0,0
