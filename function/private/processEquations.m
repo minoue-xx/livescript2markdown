@@ -25,8 +25,6 @@ function str2md = processEquations(str2md, format)
 switch format
     case 'qiita'
         str2md = regexprep(str2md,"[^`]?\$\$([^$]+)\$\$[^`]?",newline+"```math" + newline + "$1" + newline + "```");
-    case 'github_math'
-        str2md = regexprep(str2md,"[^`]?\$\$([^$]+)\$\$[^`]?",newline+"$$" + newline + "$1" + newline + "$$");
     case 'github'
         str2md = regexprep(str2md,"[^`]?\$\$([^$]+)\$\$[^`]?",newline+"$$" + newline + "$1" + newline + "$$");
     case 'github_math'
