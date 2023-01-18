@@ -12,6 +12,16 @@ This repository provides a functions to convert your live scripts to markdown fi
 
 I've checked the function with multiple live scripts but please note that it's not perfect. It's expected that you need some manual editing.
 
+# Licensing Note
+
+Livescript2markdown is licensed under a special MathWorks-specific variant of the BSD 2-Clause License. It contains this additional clause:
+
+```text
+* In all cases, the software is, and all modifications and derivatives of the
+  software shall be, licensed to you solely for use in conjunction with
+  MathWorks products and service offerings.
+```
+
 ## NOTE (2020/02/10)
 
 When exporting to LaTeX right after running the livescript, it's observed that the figures will be exported as eps files or not at all
