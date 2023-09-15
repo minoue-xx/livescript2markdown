@@ -182,4 +182,8 @@ fclose(fileID);
 
 disp("Coverting latex to markdown is complete");
 disp(mdfile);
-disp("Note: Related images are saved in " + name + "_images");
+if isMATLABReleaseOlderThan("R2023b")
+    disp("Note: Related images are saved in " + name + "_images");
+else
+    disp("Note: Related images are saved in " + name + "_media");
+end
