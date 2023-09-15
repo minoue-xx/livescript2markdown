@@ -15,7 +15,12 @@ imageParts = str(imageIdx);
 % When exported latex from live script, figures and inserted images
 % are saved in 'imagedir' as image files.
 % latex を生成した時点で Figure 等は画像としてimagedir に保存されている
-imagedir = filename + "_images/";
+if isMATLABReleaseOlderThan("R2023b")
+    imagedir = filename + "_images/";
+else
+    imagedir = filename + "_media/";
+end
+% imagedir = filename + "_images/"; (pre R2023b)
 imagedir = strrep(imagedir, '\', '/');
 
 % for each images
