@@ -4,7 +4,9 @@ Copyright 2020 The MathWorks, Inc.
 
 ## Imporant Note (2023/9/14)
 
-As of R2023b, you can use [export](https://jp.mathworks.com/help/matlab/ref/export.html) function of MATLAB to export markdown from livescript.
+As of R2023b, you can use [export](https://jp.mathworks.com/help/matlab/ref/export.html?lang=en) function of MATLAB to export markdown from livescript.
+
+Here's a [small document](doc/how2export/README.md) (in Japanese) on how to use `export` to convert livescripts to markdown.
 
 
 ## NOTE (2020/02/10)
